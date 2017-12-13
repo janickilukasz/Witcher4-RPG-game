@@ -1,19 +1,31 @@
 package app.model;
 
 public class Pole {
+	private int id;
+
+
 	private static int nr_planszy;
 	private int x;
 	private int y;
 	private int rodzaj;
 	private int stwor;
 
-	public Pole(int x, int y, int rodzaj, int stwor) {
+	public Pole(int id, int x, int y, int rodzaj, int stwor) {
+		this.id = id;
 		this.x = x;
 		this.y = y;
 		this.rodzaj = rodzaj;
 		this.stwor = stwor;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public static int getNr_planszy() {
 		return nr_planszy;
 	}

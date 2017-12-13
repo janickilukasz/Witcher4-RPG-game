@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="496.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.WalkaController">
+   <children>
+      <ImageView fx:id="imgZawodnik1" fitHeight="200.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@kura.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgZawodnik2" fitHeight="200.0" fitWidth="200.0" layoutX="386.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@kura.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="280.0" layoutY="51.0" text="VS.">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblNazwa1" alignment="CENTER" layoutX="14.0" layoutY="220.0" prefWidth="200.0" text="Wiedźmin">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="288.0" text="ATAK :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="315.0" text="OBRONA :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPoziom1" layoutX="74.0" layoutY="247.0" text="poziom 1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="342.0" text="BROŃ :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="392.0" layoutY="288.0" text="ATAK :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="392.0" layoutY="315.0" text="OBRONA :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="393.0" layoutY="342.0" text="BROŃ :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblNazwa2" alignment="CENTER" layoutX="384.0" layoutY="220.0" prefHeight="27.0" prefWidth="200.0" text="Kura">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPoziom2" layoutX="447.0" layoutY="247.0" text="poziom 1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblAtak1" layoutX="88.0" layoutY="288.0" text="1">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblObrona1" layoutX="118.0" layoutY="315.0" text="2">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblBron1" layoutX="89.0" layoutY="342.0" text="ręce (0)">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblAtak2" layoutX="454.0" layoutY="288.0" text="1">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblObrona2" layoutX="484.0" layoutY="315.0" text="2">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblBron2" layoutX="455.0" layoutY="342.0" text="ręce (0)">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="recZycie1" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="12.0" layoutX="14.0" layoutY="267.0" stroke="BLACK" strokeType="INSIDE" width="210.0" />
+      <Rectangle fx:id="recZycie2" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="12.0" layoutX="376.0" layoutY="267.0" stroke="BLACK" strokeType="INSIDE" width="210.0" />
+      <Label fx:id="lblPkt1" layoutX="227.0" layoutY="265.0" text="40" />
+      <Label fx:id="lblPkt11" layoutX="360.0" layoutY="265.0" text="40" />
+      <Button layoutX="260.0" layoutY="138.0" mnemonicParsing="false" onMouseClicked="#atakAction" prefHeight="53.0" prefWidth="83.0" text="ATAK" />
+      <Button layoutX="260.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#atakMniejszyAction" prefHeight="53.0" prefWidth="83.0" text="ATAK, ALE MNIEJSZY" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="260.0" layoutY="264.0" mnemonicParsing="false" onMouseClicked="#obronaAction" prefHeight="53.0" prefWidth="83.0" text="OBRONA" />
+      <Button layoutX="260.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#ciosSpecjalnyAction" prefHeight="53.0" prefWidth="83.0" text="CIOS SPECJALNY" textAlignment="CENTER" wrapText="true" />
+      <TextArea fx:id="txtRelacja" layoutX="142.0" layoutY="396.0" prefHeight="81.0" prefWidth="316.0" />
+   </children>
+</AnchorPane>
