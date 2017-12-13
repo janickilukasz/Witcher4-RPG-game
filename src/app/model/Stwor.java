@@ -5,6 +5,46 @@ import javafx.scene.image.Image;
 public class Stwor {
 	String nazwa;
 	Image img_maly;
+	Image img_duzy;
+	int poziom;
+	int atak;
+	int obrona;
+	String bron;
+	int bronSila;
+	int zycie;
+	
+	public int getPoziom() {
+		return poziom;
+	}
+
+	public void setPoziom(int poziom) {
+		this.poziom = poziom;
+	}
+
+	public String getBron() {
+		return bron;
+	}
+
+	public void setBron(String bron) {
+		this.bron = bron;
+	}
+
+	public int getBronSila() {
+		return bronSila;
+	}
+
+	public void setBronSila(int bronSila) {
+		this.bronSila = bronSila;
+	}
+
+	public int getZycie() {
+		return zycie;
+	}
+
+	public void setZycie(int zycie) {
+		this.zycie = zycie;
+	}
+
 	public String getNazwa() {
 		return nazwa;
 	}
@@ -45,15 +85,18 @@ public class Stwor {
 		this.obrona = obrona;
 	}
 
-	Image img_duzy;
-	int atak;
-	int obrona;
-	
-	public Stwor(String nazwa, Image img_maly, Image img_duzy, int atak, int obrona) {
+	public Stwor(String nazwa, Image img_maly, Image img_duzy, int poziom, int atak, int obrona, String bron,
+			int bronSila, int zycie) {
 		this.nazwa = nazwa;
 		this.img_maly = img_maly;
 		this.img_duzy = img_duzy;
+		this.poziom = poziom;
 		this.atak = atak;
 		this.obrona = obrona;
+		this.bron = bron;
+		this.bronSila = bronSila;
+		this.zycie = zycie;
 	}
+	
+	
 }

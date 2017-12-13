@@ -13,7 +13,7 @@
    <children>
       <ImageView fx:id="imgZawodnik1" fitHeight="200.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@kura.png" />
+            <Image url="@wiedzmak.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imgZawodnik2" fitHeight="200.0" fitWidth="200.0" layoutX="386.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -109,7 +109,7 @@
       <Rectangle fx:id="recZycie1" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="12.0" layoutX="14.0" layoutY="267.0" stroke="BLACK" strokeType="INSIDE" width="210.0" />
       <Rectangle fx:id="recZycie2" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="12.0" layoutX="376.0" layoutY="267.0" stroke="BLACK" strokeType="INSIDE" width="210.0" />
       <Label fx:id="lblPkt1" layoutX="227.0" layoutY="265.0" text="40" />
-      <Label fx:id="lblPkt11" layoutX="360.0" layoutY="265.0" text="40" />
+      <Label fx:id="lblPkt2" layoutX="360.0" layoutY="265.0" text="40" />
       <Button layoutX="260.0" layoutY="138.0" mnemonicParsing="false" onMouseClicked="#atakAction" prefHeight="53.0" prefWidth="83.0" text="ATAK" />
       <Button layoutX="260.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#atakMniejszyAction" prefHeight="53.0" prefWidth="83.0" text="ATAK, ALE MNIEJSZY" textAlignment="CENTER" wrapText="true" />
       <Button layoutX="260.0" layoutY="264.0" mnemonicParsing="false" onMouseClicked="#obronaAction" prefHeight="53.0" prefWidth="83.0" text="OBRONA" />

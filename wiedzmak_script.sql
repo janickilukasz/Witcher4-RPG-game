@@ -1,4 +1,6 @@
 drop table if exists wiedzmak.pola;
+drop table if exists wiedzmak.stwory;
+drop database if exists wiedzmak;
 
 create database wiedzmak DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 use wiedzmak;
@@ -19,7 +21,7 @@ INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (0,0,9,0,0,0),
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (0,1,0,0,0,0),(0,1,0,1,0,0),(0,1,0,2,0,0),(0,1,0,3,0,0),(0,1,0,4,0,0),(0,1,0,5,0,0),(0,1,0,6,0,0),(0,1,0,7,0,0),(0,1,0,8,0,0),(0,1,0,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (0,1,1,0,0,0),(0,1,1,1,0,0),(0,1,1,2,0,0),(0,1,1,3,0,0),(0,1,1,4,1,0),(0,1,1,5,1,0),(0,1,1,6,0,0),(0,1,1,7,0,0),(0,1,1,8,0,0),(0,1,1,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (0,1,2,0,0,0),(0,1,2,1,0,0),(0,1,2,2,0,0),(0,1,2,3,1,0),(0,1,2,4,0,0),(0,1,2,5,0,0),(0,1,2,6,1,0),(0,1,2,7,0,0),(0,1,2,8,0,0),(0,1,2,9,0,0);
-INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (0,1,3,0,0,0),(0,1,3,1,0,0),(0,1,3,2,0,0),(0,1,3,3,1,0),(0,1,3,4,0,0),(0,1,3,5,0,0),(0,1,3,6,1,0),(0,1,3,7,0,0),(0,1,3,8,0,0),(0,1,3,9,0,0);
+INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (0,1,3,0,0,0),(0,1,3,1,0,1),(0,1,3,2,0,0),(0,1,3,3,1,0),(0,1,3,4,0,0),(0,1,3,5,0,0),(0,1,3,6,1,0),(0,1,3,7,0,0),(0,1,3,8,0,0),(0,1,3,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (0,1,4,0,0,0),(0,1,4,1,0,0),(0,1,4,2,0,0),(0,1,4,3,0,0),(0,1,4,4,0,0),(0,1,4,5,0,0),(0,1,4,6,1,0),(0,1,4,7,0,0),(0,1,4,8,0,0),(0,1,4,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (0,1,5,0,0,0),(0,1,5,1,0,0),(0,1,5,2,0,0),(0,1,5,3,0,0),(0,1,5,4,0,0),(0,1,5,5,1,0),(0,1,5,6,0,0),(0,1,5,7,0,0),(0,1,5,8,0,0),(0,1,5,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (0,1,6,0,0,0),(0,1,6,1,0,0),(0,1,6,2,0,0),(0,1,6,3,0,0),(0,1,6,4,1,0),(0,1,6,5,0,0),(0,1,6,6,0,0),(0,1,6,7,0,0),(0,1,6,8,0,0),(0,1,6,9,0,0);
@@ -46,7 +48,7 @@ INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,4,0,0,0),
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,5,0,0,0),(1,0,5,1,0,0),(1,0,5,2,1,0),(1,0,5,3,1,0),(1,0,5,4,1,0),(1,0,5,5,1,0),(1,0,5,6,1,0),(1,0,5,7,0,0),(1,0,5,8,0,0),(1,0,5,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,6,0,0,0),(1,0,6,1,0,0),(1,0,6,2,0,0),(1,0,6,3,0,0),(1,0,6,4,0,0),(1,0,6,5,1,0),(1,0,6,6,0,0),(1,0,6,7,0,0),(1,0,6,8,0,0),(1,0,6,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,7,0,0,0),(1,0,7,1,0,0),(1,0,7,2,0,0),(1,0,7,3,0,0),(1,0,7,4,0,0),(1,0,7,5,1,0),(1,0,7,6,0,0),(1,0,7,7,0,0),(1,0,7,8,0,0),(1,0,7,9,0,0);
-INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,8,0,0,0),(1,0,8,1,0,0),(1,0,8,2,0,0),(1,0,8,3,0,0),(1,0,8,4,0,0),(1,0,8,5,1,0),(1,0,8,6,0,0),(1,0,8,7,0,0),(1,0,8,8,0,0),(1,0,8,9,0,0);
+INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,8,0,0,0),(1,0,8,1,0,0),(1,0,8,2,0,0),(1,0,8,3,0,0),(1,0,8,4,0,1),(1,0,8,5,1,0),(1,0,8,6,0,0),(1,0,8,7,0,0),(1,0,8,8,0,0),(1,0,8,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,9,0,0,0),(1,0,9,1,0,0),(1,0,9,2,0,0),(1,0,9,3,0,0),(1,0,9,4,0,0),(1,0,9,5,0,0),(1,0,9,6,0,0),(1,0,9,7,0,0),(1,0,9,8,0,0),(1,0,9,9,0,0);
 
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,1,0,0,0,0),(1,1,0,1,0,0),(1,1,0,2,0,0),(1,1,0,3,0,0),(1,1,0,4,0,0),(1,1,0,5,0,0),(1,1,0,6,0,0),(1,1,0,7,0,0),(1,1,0,8,0,0),(1,1,0,9,0,0);
@@ -104,10 +106,5 @@ INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (2,2,7,0,0,0),
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (2,2,8,0,0,0),(2,2,8,1,0,0),(2,2,8,2,0,0),(2,2,8,3,1,0),(2,2,8,4,1,0),(2,2,8,5,1,0),(2,2,8,6,1,0),(2,2,8,7,0,0),(2,2,8,8,0,0),(2,2,8,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (2,2,9,0,0,0),(2,2,9,1,0,0),(2,2,9,2,0,0),(2,2,9,3,0,0),(2,2,9,4,0,0),(2,2,9,5,0,0),(2,2,9,6,0,0),(2,2,9,7,0,0),(2,2,9,8,0,0),(2,2,9,9,0,0);
 
-
-select * from pola;
-
-create table stwory(id smallint primary key, nazwa varchar(30), img_maly varchar(30), img_duzy varchar(30), atak tinyint, obrona tinyint);
-INSERT INTO stwory(id, nazwa, img_maly, img_duzy, atak, obrona) VALUES(1, "KURA","kura_mala.png","kura.png",0,1);
-
-select * from stwory where id = 1;
+create table stwory(id smallint primary key, nazwa varchar(30), img_maly varchar(30), img_duzy varchar(30), poziom tinyint, atak tinyint, obrona tinyint, bron varchar(40), bronsila tinyint, zycie smallint);
+INSERT INTO stwory VALUES(1, 'Kura','kura_mala.png','kura.png',1,0,1,'dziób',0,5);

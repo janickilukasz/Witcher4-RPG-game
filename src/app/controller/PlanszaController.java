@@ -14,6 +14,7 @@ import app.model.Pole;
 import app.model.Stwor;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -28,6 +29,13 @@ public class PlanszaController {
 
 	Image wiedzmin_img;
 	ImageView wiedzmin;
+	static String imie = "Jasio";
+	static int poziom = 17;
+	static int atak = 11;
+	static int obrona = 66;
+	static String bron = "maczuga";
+	static int bronSila = 55;
+	static int zycie = 30;
 	static int x = 1;
 	static int y = 1;
 	static int ile_pol = 10;
@@ -35,6 +43,8 @@ public class PlanszaController {
 	static int nr_planszyY = 0;
 	static int ile_plansz = 3;
 
+	static int potworek = 0;
+	
 	ArrayList<Pole> plansza;
 	static HashMap<Integer, Stwor> stworki = new HashMap<Integer, Stwor>();
 
@@ -81,7 +91,7 @@ public class PlanszaController {
 						Image temp1 = new Image("/app/view/" + rs.getString("img_maly"), 60, 60, true, false);
 						Image temp2 = new Image("/app/view/" + rs.getString("img_duzy"), 500, 500, true, false);
 						stworki.put(i.getId(),
-								new Stwor(rs.getString("nazwa"), temp1,	temp2, rs.getInt("atak"), rs.getInt("obrona")));
+								new Stwor(rs.getString("nazwa"), temp1,	temp2, rs.getInt("poziom"), rs.getInt("atak"), rs.getInt("obrona"), rs.getString("bron"), rs.getInt("bronsila"), rs.getInt("zycie")));
 					} catch (SQLException e) {
 						System.out.println("B³¹d przy selectowaniu stwora!");
 					}
@@ -157,6 +167,15 @@ public class PlanszaController {
 		}
 		return 0;
 	}
+	
+	private int jakieId(int x, int y) {
+		for (Pole i : plansza) {
+			if (x == i.getX() && y == i.getY()) {
+				return i.getId();
+			}
+		}
+		return 0;
+	}
 
 	private void show(String plik, String tytul) {
 		Stage stejdz = new Stage();
@@ -171,11 +190,11 @@ public class PlanszaController {
 		stejdz.setTitle(tytul);
 		stejdz.show();
 	}
-
+	
 	@FXML
 	void keyPressAction(KeyEvent event) {
 		String kierunek = "";
-
+		boolean walka = false;
 		if (event.getCode() == KeyCode.UP) {
 			if (x > 0 && jakiRodzaj(x - 1, y) == 0 && jakiPotwor(x - 1, y) == 0) {
 				x--;
@@ -184,8 +203,8 @@ public class PlanszaController {
 				nowa_plansza();
 				x = ile_pol - 1;
 			} else if (jakiPotwor(x - 1, y) > 0) {
-				lbl_Test.setText("MONSTER WYKRYTY!");
-				show("WalkaView", "Walka!");
+				potworek = jakieId(x-1, y);
+				walka = true;
 			}
 			kierunek = "gora";
 		}
@@ -198,8 +217,8 @@ public class PlanszaController {
 				nowa_plansza();
 				x = 0;
 			} else if (jakiPotwor(x + 1, y) > 0) {
-				lbl_Test.setText("MONSTER WYKRYTY!");
-				show("WalkaView", "Walka!");
+				potworek = jakieId(x+1, y);
+				walka = true;
 			}
 			kierunek = "dol";
 		}
@@ -212,8 +231,8 @@ public class PlanszaController {
 				nowa_plansza();
 				y = ile_pol - 1;
 			} else if (jakiPotwor(x, y - 1) > 0) {
-				lbl_Test.setText("MONSTER WYKRYTY!");
-				show("WalkaView", "Walka!");
+				potworek = jakieId(x, y-1);
+				walka = true;
 			}
 			kierunek = "lewo";
 		}
@@ -226,10 +245,16 @@ public class PlanszaController {
 				nowa_plansza();
 				y = 0;
 			} else if (jakiPotwor(x, y + 1) > 0) {
-				lbl_Test.setText("MONSTER WYKRYTY!");
-				show("WalkaView", "Walka!");
+				potworek = jakieId(x, y+1);
+				walka = true;
 			}
 			kierunek = "prawo";
+		}
+		
+		if(walka){
+			lbl_Test.setText("MONSTER WYKRYTY!");
+			show("WalkaView", "Walka!");
+			((Node) (event.getSource())).getScene().getWindow().hide();
 		}
 		showPostac(kierunek);
 	}
