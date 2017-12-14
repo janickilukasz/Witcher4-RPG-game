@@ -16,11 +16,7 @@
             <Image url="@wiedzmak.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgZawodnik2" fitHeight="200.0" fitWidth="200.0" layoutX="386.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@kura.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="imgZawodnik2" fitHeight="200.0" fitWidth="200.0" layoutX="386.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="280.0" layoutY="51.0" text="VS.">
          <font>
             <Font name="System Bold" size="32.0" />

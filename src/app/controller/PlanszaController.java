@@ -35,7 +35,7 @@ public class PlanszaController {
 	static int obrona = 66;
 	static String bron = "maczuga";
 	static int bronSila = 55;
-	static int zycie = 30;
+	static int zycie = 50;
 	static int x = 1;
 	static int y = 1;
 	static int ile_pol = 10;

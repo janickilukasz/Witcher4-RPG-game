@@ -42,7 +42,7 @@ INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (0,2,9,0,0,0),
 
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,0,0,0,0),(1,0,0,1,0,0),(1,0,0,2,0,0),(1,0,0,3,0,0),(1,0,0,4,0,0),(1,0,0,5,0,0),(1,0,0,6,0,0),(1,0,0,7,0,0),(1,0,0,8,0,0),(1,0,0,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,1,0,0,0),(1,0,1,1,0,0),(1,0,1,2,0,0),(1,0,1,3,1,0),(1,0,1,4,0,0),(1,0,1,5,0,0),(1,0,1,6,0,0),(1,0,1,7,0,0),(1,0,1,8,0,0),(1,0,1,9,0,0);
-INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,2,0,0,0),(1,0,2,1,0,0),(1,0,2,2,1,0),(1,0,2,3,0,0),(1,0,2,4,0,0),(1,0,2,5,0,0),(1,0,2,6,0,0),(1,0,2,7,0,0),(1,0,2,8,0,0),(1,0,2,9,0,0);
+INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,2,0,0,0),(1,0,2,1,0,0),(1,0,2,2,1,0),(1,0,2,3,0,0),(1,0,2,4,0,2),(1,0,2,5,0,0),(1,0,2,6,0,0),(1,0,2,7,0,0),(1,0,2,8,0,0),(1,0,2,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,3,0,0,0),(1,0,3,1,0,0),(1,0,3,2,1,0),(1,0,3,3,0,0),(1,0,3,4,0,0),(1,0,3,5,1,0),(1,0,3,6,0,0),(1,0,3,7,0,0),(1,0,3,8,0,0),(1,0,3,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,4,0,0,0),(1,0,4,1,0,0),(1,0,4,2,1,0),(1,0,4,3,0,0),(1,0,4,4,0,0),(1,0,4,5,1,0),(1,0,4,6,0,0),(1,0,4,7,0,0),(1,0,4,8,0,0),(1,0,4,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,5,0,0,0),(1,0,5,1,0,0),(1,0,5,2,1,0),(1,0,5,3,1,0),(1,0,5,4,1,0),(1,0,5,5,1,0),(1,0,5,6,1,0),(1,0,5,7,0,0),(1,0,5,8,0,0),(1,0,5,9,0,0);
@@ -64,7 +64,7 @@ INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,1,9,0,0,0),
 
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,2,0,0,0,0),(1,2,0,1,0,0),(1,2,0,2,0,0),(1,2,0,3,0,0),(1,2,0,4,0,0),(1,2,0,5,0,0),(1,2,0,6,0,0),(1,2,0,7,0,0),(1,2,0,8,0,0),(1,2,0,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,2,1,0,0,0),(1,2,1,1,0,0),(1,2,1,2,0,0),(1,2,1,3,0,0),(1,2,1,4,1,0),(1,2,1,5,1,0),(1,2,1,6,0,0),(1,2,1,7,0,0),(1,2,1,8,0,0),(1,2,1,9,0,0);
-INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,2,2,0,0,0),(1,2,2,1,0,0),(1,2,2,2,0,0),(1,2,2,3,1,0),(1,2,2,4,0,0),(1,2,2,5,0,0),(1,2,2,6,1,0),(1,2,2,7,0,0),(1,2,2,8,0,0),(1,2,2,9,0,0);
+INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,2,2,0,0,0),(1,2,2,1,0,2),(1,2,2,2,0,0),(1,2,2,3,1,0),(1,2,2,4,0,0),(1,2,2,5,0,0),(1,2,2,6,1,0),(1,2,2,7,0,0),(1,2,2,8,0,0),(1,2,2,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,2,3,0,0,0),(1,2,3,1,0,0),(1,2,3,2,1,0),(1,2,3,3,0,0),(1,2,3,4,0,0),(1,2,3,5,0,0),(1,2,3,6,0,0),(1,2,3,7,0,0),(1,2,3,8,0,0),(1,2,3,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,2,4,0,0,0),(1,2,4,1,0,0),(1,2,4,2,1,0),(1,2,4,3,0,0),(1,2,4,4,1,0),(1,2,4,5,1,0),(1,2,4,6,0,0),(1,2,4,7,0,0),(1,2,4,8,0,0),(1,2,4,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,2,5,0,0,0),(1,2,5,1,0,0),(1,2,5,2,1,0),(1,2,5,3,1,0),(1,2,5,4,0,0),(1,2,5,5,0,0),(1,2,5,6,1,0),(1,2,5,7,0,0),(1,2,5,8,0,0),(1,2,5,9,0,0);
@@ -107,4 +107,6 @@ INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (2,2,8,0,0,0),
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (2,2,9,0,0,0),(2,2,9,1,0,0),(2,2,9,2,0,0),(2,2,9,3,0,0),(2,2,9,4,0,0),(2,2,9,5,0,0),(2,2,9,6,0,0),(2,2,9,7,0,0),(2,2,9,8,0,0),(2,2,9,9,0,0);
 
 create table stwory(id smallint primary key, nazwa varchar(30), img_maly varchar(30), img_duzy varchar(30), poziom tinyint, atak tinyint, obrona tinyint, bron varchar(40), bronsila tinyint, zycie smallint);
+#MAX ŻYCIE TO 210 PKT!!!!!
 INSERT INTO stwory VALUES(1, 'Kura','kura_mala.png','kura.png',1,0,1,'dziób',0,5);
+INSERT INTO stwory VALUES(2, 'Dzik','dzik_maly.png','dzik.png',10,13,15,'ryj',3,210);
