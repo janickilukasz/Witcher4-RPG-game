@@ -214,7 +214,8 @@ public class PlanszaController {
 		String kierunek = "";
 		boolean walka = false;
 		if (event.getCode() == KeyCode.UP) {
-			if (x > 0 && jakiRodzaj(x - 1, y) < 100 && jakiPotwor(x - 1, y) == 0) {
+			//TUTAJ PONI¯EJ ZAMIAST FALSE TRZEBA DAÆ ZYCIE STWORKA
+			if (x > 0 && jakiRodzaj(x - 1, y) < 100 && (jakiPotwor(x - 1, y) == 0 || stworki.get(jakieId(x-1, y)).getZycie()==0)) {
 				x--;
 			} else if (x == 0 && nr_planszyX > 0) {
 				nr_planszyX--;
@@ -228,7 +229,7 @@ public class PlanszaController {
 		}
 
 		if (event.getCode() == KeyCode.DOWN) {
-			if (x < ile_pol - 1 && jakiRodzaj(x + 1, y) < 100 && jakiPotwor(x + 1, y) == 0) {
+			if (x < ile_pol - 1 && jakiRodzaj(x + 1, y) < 100 && (jakiPotwor(x + 1, y) == 0 || stworki.get(jakieId(x+1, y)).getZycie()==0)) {
 				x++;
 			} else if (x == ile_pol - 1 && nr_planszyX < ile_plansz - 1) {
 				nr_planszyX++;
@@ -242,7 +243,7 @@ public class PlanszaController {
 		}
 
 		if (event.getCode() == KeyCode.LEFT) {
-			if (y > 0 && jakiRodzaj(x, y - 1) < 100 && jakiPotwor(x, y - 1) == 0) {
+			if (y > 0 && jakiRodzaj(x, y - 1) < 100 && (jakiPotwor(x, y - 1) == 0 || stworki.get(jakieId(x, y-1)).getZycie()==0)) {
 				y--;
 			} else if (y == 0 && nr_planszyY > 0) {
 				nr_planszyY--;
@@ -256,7 +257,7 @@ public class PlanszaController {
 		}
 
 		if (event.getCode() == KeyCode.RIGHT) {
-			if (y < ile_pol - 1 && jakiRodzaj(x, y + 1) < 100 && jakiPotwor(x, y + 1) == 0) {
+			if (y < ile_pol - 1 && jakiRodzaj(x, y + 1) < 100 && (jakiPotwor(x, y + 1) == 0 || stworki.get(jakieId(x, y+1)).getZycie()==0)) {
 				y++;
 			} else if (y == ile_pol - 1 && nr_planszyY < ile_plansz - 1) {
 				nr_planszyY++;

@@ -110,6 +110,6 @@
       <Button layoutX="260.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#atakMniejszyAction" prefHeight="53.0" prefWidth="83.0" text="ATAK, ALE MNIEJSZY" textAlignment="CENTER" wrapText="true" />
       <Button layoutX="260.0" layoutY="264.0" mnemonicParsing="false" onMouseClicked="#obronaAction" prefHeight="53.0" prefWidth="83.0" text="OBRONA" />
       <Button layoutX="260.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#ciosSpecjalnyAction" prefHeight="53.0" prefWidth="83.0" text="CIOS SPECJALNY" textAlignment="CENTER" wrapText="true" />
-      <TextArea fx:id="txtRelacja" layoutX="142.0" layoutY="396.0" prefHeight="129.0" prefWidth="316.0" />
+      <TextArea fx:id="txtRelacja" layoutX="142.0" layoutY="396.0" prefHeight="129.0" prefWidth="316.0" wrapText="true" />
    </children>
 </AnchorPane>
