@@ -74,7 +74,7 @@ public class PlanszaController {
 			ImageView iv_trawa = new ImageView(trawa);
 			gp.add(iv_trawa, i.getY(), i.getX());
 			//CA£Y PONI¯SZY FRAGMENT TRZEBA ZASTAPIÆ WYGODNA METODA
-			//Dodawanie drzewek
+			//Dodawanie drzewek			
 			if (i.getRodzaj() == 100) {
 				Random rnd = new Random();
 				int los = rnd.nextInt(5) + 1;

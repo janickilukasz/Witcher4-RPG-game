@@ -257,7 +257,8 @@ public class WalkaController {
 			loginError.setHeaderText("Pokona³eœ stwora!");
 			loginError.setContentText("Pokona³eœ stwora o nazwie " + nazwa.toUpperCase() + "!");
 			PlanszaController.stworki.get(PlanszaController.potworek).setZycie(0);
-			//PlanszaController.stworki.get(PlanszaController.potworek).setImg_duzy();
+			Image kill = new Image("/app/view/kill.png", 60, 60, true, false);
+			PlanszaController.stworki.get(PlanszaController.potworek).setImg_maly(kill);
 			show("PlanszaView","WITCHER 4 : Dzika Zgon");
 			((Node) (myszkoruch.getSource())).getScene().getWindow().hide();
 		}else{
