@@ -30,14 +30,14 @@ public class PlanszaController {
 	Image wiedzmin_img;
 	ImageView wiedzmin;
 	static String imie = "Jasio";
-	static int poziom = 17;
-	static int atak = 11;
-	static int obrona = 66;
-	static String bron = "maczuga";
-	static int bronSila = 55;
-	static int zycie = 50;
-	static int x = 1;
-	static int y = 1;
+	static int poziom = 1;
+	static int atak = 2;
+	static int obrona = 2;
+	static String bron = "rêce";
+	static int bronSila = 0;
+	static int zycie = 8;
+	static int x = 3;
+	static int y = 4;
 	static int ile_pol = 10;
 	static int nr_planszyX = 0;
 	static int nr_planszyY = 0;
@@ -73,16 +73,36 @@ public class PlanszaController {
 			Image trawa = new Image("/app/view/trawa.jpg", 60, 60, true, false);
 			ImageView iv_trawa = new ImageView(trawa);
 			gp.add(iv_trawa, i.getY(), i.getX());
-			if (i.getRodzaj() == 1) {
+			//CA£Y PONI¯SZY FRAGMENT TRZEBA ZASTAPIÆ WYGODNA METODA
+			//Dodawanie drzewek
+			if (i.getRodzaj() == 100) {
 				Random rnd = new Random();
 				int los = rnd.nextInt(5) + 1;
 				Image drzewo = new Image("/app/view/tree" + los + ".png", 60, 60, true, false);
 				ImageView iv_drzewo = new ImageView(drzewo);
 				gp.add(iv_drzewo, i.getY(), i.getX());
 			}
+			//Dodawanie ognisk
+			if (i.getRodzaj() == 101) {
+				Image img = new Image("/app/view/ognisko.png", 60, 60, true, false);
+				ImageView iv = new ImageView(img);
+				gp.add(iv, i.getY(), i.getX());
+			}
+			//Dodawanie lewego namiotu
+			if (i.getRodzaj() == 102) {
+				Image img = new Image("/app/view/namiot_lewo.png", 60, 60, true, false);
+				ImageView iv = new ImageView(img);
+				gp.add(iv, i.getY(), i.getX());
+			}
+			//Dodawanie prawego namiotu
+			if (i.getRodzaj() == 103) {
+				Image img = new Image("/app/view/namiot_prawo.png", 60, 60, true, false);
+				ImageView iv = new ImageView(img);
+				gp.add(iv, i.getY(), i.getX());
+			}
+			
 			if (i.getStwor() > 0) {
 				if (stworki.get(i.getId()) == null) {
-					System.out.println("stworki null");
 					try {
 						ps = conn.prepareStatement("SELECT * FROM stwory WHERE id = ?");
 						ps.setInt(1, i.getStwor());
@@ -96,8 +116,6 @@ public class PlanszaController {
 						System.out.println("B³¹d przy selectowaniu stwora!");
 					}
 
-				} else {
-					System.out.println("stworki nie null");
 				}
 
 				Image stwor = stworki.get(i.getId()).getImg_maly();
@@ -196,7 +214,7 @@ public class PlanszaController {
 		String kierunek = "";
 		boolean walka = false;
 		if (event.getCode() == KeyCode.UP) {
-			if (x > 0 && jakiRodzaj(x - 1, y) == 0 && jakiPotwor(x - 1, y) == 0) {
+			if (x > 0 && jakiRodzaj(x - 1, y) < 100 && jakiPotwor(x - 1, y) == 0) {
 				x--;
 			} else if (x == 0 && nr_planszyX > 0) {
 				nr_planszyX--;
@@ -210,7 +228,7 @@ public class PlanszaController {
 		}
 
 		if (event.getCode() == KeyCode.DOWN) {
-			if (x < ile_pol - 1 && jakiRodzaj(x + 1, y) == 0 && jakiPotwor(x + 1, y) == 0) {
+			if (x < ile_pol - 1 && jakiRodzaj(x + 1, y) < 100 && jakiPotwor(x + 1, y) == 0) {
 				x++;
 			} else if (x == ile_pol - 1 && nr_planszyX < ile_plansz - 1) {
 				nr_planszyX++;
@@ -224,7 +242,7 @@ public class PlanszaController {
 		}
 
 		if (event.getCode() == KeyCode.LEFT) {
-			if (y > 0 && jakiRodzaj(x, y - 1) == 0 && jakiPotwor(x, y - 1) == 0) {
+			if (y > 0 && jakiRodzaj(x, y - 1) < 100 && jakiPotwor(x, y - 1) == 0) {
 				y--;
 			} else if (y == 0 && nr_planszyY > 0) {
 				nr_planszyY--;
@@ -238,7 +256,7 @@ public class PlanszaController {
 		}
 
 		if (event.getCode() == KeyCode.RIGHT) {
-			if (y < ile_pol - 1 && jakiRodzaj(x, y + 1) == 0 && jakiPotwor(x, y + 1) == 0) {
+			if (y < ile_pol - 1 && jakiRodzaj(x, y + 1) < 100 && jakiPotwor(x, y + 1) == 0) {
 				y++;
 			} else if (y == ile_pol - 1 && nr_planszyY < ile_plansz - 1) {
 				nr_planszyY++;

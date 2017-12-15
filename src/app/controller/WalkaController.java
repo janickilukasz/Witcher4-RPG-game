@@ -80,6 +80,12 @@ public class WalkaController {
 	int bronSila2;
 	int zycie2;
 	Image img_potwor;
+	
+	int specjalny1 = 0;
+	int specjalny2 = 0;
+	
+	boolean wobronie1 = false;
+	boolean wobronie2 = false;
 
 	public void initialize() {
 		imie = PlanszaController.imie;
@@ -132,47 +138,73 @@ public class WalkaController {
 		recZycie2.setFill(Color.rgb(255, g2, 0));
 	}
 
+	int atakPunkty(boolean mocno, int poziom, int atak, int bronSila){
+		Random los = new Random();
+		double mnoznik = (mocno ? 1 : 0 ) * 0.5 + los.nextDouble() / 2;
+		int atakPkt = (int) Math.round((poziom * atak + bronSila) * mnoznik);
+		System.out.println("Mno¿nik="+mnoznik+", poziom="+poziom+", atak="+atak+", bronSila="+bronSila);
+		return atakPkt;
+	}
+	
+	int obronaPunkty(boolean wobronie, int poziom, int obrona){
+		Random los = new Random();
+		double mnoznik = (wobronie ? 1 : 0 ) * 0.5 + los.nextDouble();
+		int obronaPkt = (int) Math.round(poziom * obrona * mnoznik);
+		System.out.println("Mno¿nik="+mnoznik+", poziom="+poziom+", obrona="+obrona);
+		return obronaPkt;
+	}
+	
+	void atak(boolean mocno){
+		wobronie1 = false;
+		int atakPkt = atakPunkty(mocno, poziom1, atak1, bronSila1);
+		int obronaPkt = obronaPunkty(wobronie2, poziom2, obrona2);
+		int roznicaPkt = Math.max(atakPkt-obronaPkt, 0);
+		roznicaPkt = Math.min(roznicaPkt, zycie2);
+		zycie2-=roznicaPkt;
+		paskiZycia();
+		String temp = txtRelacja.getText();
+		txtRelacja.setText(imie + " atakuje i zadaje " + atakPkt + " obra¿eñ!!\n" + nazwa + " siê broni z obron¹ "
+				+ obronaPkt + "\n" + nazwa + " traci "+roznicaPkt+" pkt. ¿ycia!\n---------------------------\n"+ temp);
+	}
+	
+	void obrona(){
+		//Na razie potwory zawsze atakuj¹ mocno (poni¿ej wartoœæ true) i nigdy nie przechodz¹ do obrony
+		int atakPkt = atakPunkty(true, poziom2, atak2, bronSila2);
+		int obronaPkt = obronaPunkty(wobronie1, poziom1, obrona1);
+		int roznicaPkt = Math.max(atakPkt-obronaPkt, 0);
+		roznicaPkt = Math.min(roznicaPkt, zycie1);
+		zycie1-=roznicaPkt;
+		paskiZycia();
+		String temp = txtRelacja.getText();
+		txtRelacja.setText(nazwa + " atakuje i zadaje " + atakPkt + " obra¿eñ!!\n" + imie + " siê broni z obron¹ "
+				+ obronaPkt + ".\n" + imie + " traci "+roznicaPkt+" pkt. ¿ycia!\n---------------------------\n"+ temp);
+	}
+	
 	@FXML
 	void atakAction(MouseEvent event) {
-		Random los = new Random();
-		double mnoznik = 0.5 + los.nextDouble() / 2;
-		int atakPkt = (int) Math.ceil((poziom1 * atak1 + bronSila1) * mnoznik);
-		mnoznik = los.nextDouble();
-		int obronaPkt = (int) Math.ceil(poziom2 * obrona2 * mnoznik);
-		int roznicaPkt = Math.max(atakPkt-obronaPkt, 0);
-		roznicaPkt = Math.min(roznicaPkt, zycie2);
-		zycie2-=roznicaPkt;
-		paskiZycia();
-		String temp = txtRelacja.getText();
-		txtRelacja.setText(imie + " atakuje i zadaje " + atakPkt + " obra¿eñ!!\n" + nazwa + " siê broni z obron¹ "
-				+ obronaPkt + "\n" + nazwa + " traci "+roznicaPkt+" pkt. ¿ycia!\n"+ temp);
+		atak(true);
+		obrona();
 	}
-
+	
 	@FXML
 	void atakMniejszyAction(MouseEvent event) {
-		Random los = new Random();
-		double mnoznik = los.nextDouble() / 2;
-		int atakPkt = (int) Math.ceil((poziom1 * atak1 + bronSila1) * mnoznik);
-		mnoznik = los.nextDouble();
-		int obronaPkt = (int) Math.ceil(poziom2 * obrona2 * mnoznik);
-		int roznicaPkt = Math.max(atakPkt-obronaPkt, 0);
-		roznicaPkt = Math.min(roznicaPkt, zycie2);
-		zycie2-=roznicaPkt;
-		paskiZycia();
-		String temp = txtRelacja.getText();
-		txtRelacja.setText(imie + " atakuje i zadaje " + atakPkt + " obra¿eñ!!\n" + nazwa + " siê broni z obron¹ "
-				+ obronaPkt + "\n" + nazwa + " traci "+roznicaPkt+" pkt. ¿ycia!\n"+ temp);
+		atak(false);
+		specjalny1++;
+		obrona();
 	}
 
 	@FXML
 	void ciosSpecjalnyAction(MouseEvent event) {
-
+		specjalny1=0;
+		obrona();
 	}
 
 	@FXML
 	void obronaAction(MouseEvent event) {
+		wobronie1 = true;
 		String temp = txtRelacja.getText();
-		txtRelacja.setText(imie + " przechodzi do obrony.\n"+ temp);
+		txtRelacja.setText(imie + " przechodzi do obrony.\n---------------------------\n"+ temp);
+		obrona();
 	}
 
 }
