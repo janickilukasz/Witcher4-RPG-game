@@ -30,7 +30,7 @@ public class PlanszaController {
 	Image wiedzmin_img;
 	ImageView wiedzmin;
 	static String imie = "Jasio";
-	static int poziom = 1;
+	static int spryt = 1;
 	static int atak = 2;
 	static int obrona = 2;
 	static String bron = "rêce";
@@ -111,7 +111,7 @@ public class PlanszaController {
 						Image temp1 = new Image("/app/view/" + rs.getString("img_maly"), 60, 60, true, false);
 						Image temp2 = new Image("/app/view/" + rs.getString("img_duzy"), 500, 500, true, false);
 						stworki.put(i.getId(),
-								new Stwor(rs.getString("nazwa"), temp1,	temp2, rs.getInt("poziom"), rs.getInt("atak"), rs.getInt("obrona"), rs.getString("bron"), rs.getInt("bronsila"), rs.getInt("zycie")));
+								new Stwor(rs.getString("nazwa"), temp1,	temp2, rs.getInt("spryt"), rs.getInt("atak"), rs.getInt("obrona"), rs.getString("bron"), rs.getInt("bronsila"), rs.getInt("zycie")));
 					} catch (SQLException e) {
 						System.out.println("B³¹d przy selectowaniu stwora!");
 					}

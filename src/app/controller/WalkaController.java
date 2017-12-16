@@ -3,6 +3,11 @@ package app.controller;
 import java.io.IOException;
 import java.util.Random;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class WalkaController {
 
@@ -31,13 +37,13 @@ public class WalkaController {
 	private Label lblNazwa1;
 
 	@FXML
-	private Label lblPoziom1;
+	private Label lblSpryt1;
 
 	@FXML
 	private Label lblNazwa2;
 
 	@FXML
-	private Label lblPoziom2;
+	private Label lblSpryt2;
 
 	@FXML
 	private Label lblAtak1;
@@ -72,10 +78,13 @@ public class WalkaController {
 	@FXML
 	private TextArea txtRelacja;
 
+	@FXML
+	private ImageView ivAnimacja;
+
 	MouseEvent myszkoruch;
-	
+
 	String imie;
-	int poziom1;
+	int spryt1;
 	int atak1;
 	int obrona1;
 	String bron1;
@@ -83,7 +92,7 @@ public class WalkaController {
 	int zycie1;
 
 	String nazwa;
-	int poziom2;
+	int spryt2;
 	int atak2;
 	int obrona2;
 	String bron2;
@@ -99,7 +108,7 @@ public class WalkaController {
 
 	public void initialize() {
 		imie = PlanszaController.imie;
-		poziom1 = PlanszaController.poziom;
+		spryt1 = PlanszaController.spryt;
 		atak1 = PlanszaController.atak;
 		obrona1 = PlanszaController.obrona;
 		bron1 = PlanszaController.bron;
@@ -107,7 +116,7 @@ public class WalkaController {
 		zycie1 = PlanszaController.zycie;
 
 		nazwa = PlanszaController.stworki.get(PlanszaController.potworek).getNazwa();
-		poziom2 = PlanszaController.stworki.get(PlanszaController.potworek).getPoziom();
+		spryt2 = PlanszaController.stworki.get(PlanszaController.potworek).getSpryt();
 		atak2 = PlanszaController.stworki.get(PlanszaController.potworek).getAtak();
 		obrona2 = PlanszaController.stworki.get(PlanszaController.potworek).getObrona();
 		bron2 = PlanszaController.stworki.get(PlanszaController.potworek).getBron();
@@ -117,11 +126,11 @@ public class WalkaController {
 		imgZawodnik2.setImage(img_potwor);
 
 		statystyki();
-		if (poziom2 > poziom1) {
+		if (spryt2 > spryt1) {
 			txtRelacja.setText(
 					"Stwór o nazwie " + nazwa.toUpperCase() + " jest sprytniejszy od Ciebie i to on zaczyna walkê!");
 			obrona();
-		} else if (poziom2 == poziom1) {
+		} else if (spryt2 == spryt1) {
 			Random rnd = new Random();
 			double los = rnd.nextDouble();
 			if (los > 0.5) {
@@ -140,13 +149,13 @@ public class WalkaController {
 
 	private void statystyki() {
 		lblNazwa1.setText("WiedŸmin " + imie);
-		lblPoziom1.setText("poziom " + poziom1);
+		lblSpryt1.setText("" + spryt1);
 		lblAtak1.setText("" + atak1);
 		lblObrona1.setText("" + obrona1);
 		lblBron1.setText(bron1 + " (" + bronSila1 + ")");
 
 		lblNazwa2.setText(nazwa);
-		lblPoziom2.setText("poziom " + poziom2);
+		lblSpryt2.setText("" + spryt2);
 		lblAtak2.setText("" + atak2);
 		lblObrona2.setText("" + obrona2);
 		lblBron2.setText(bron2 + " (" + bronSila2 + ")");
@@ -185,8 +194,8 @@ public class WalkaController {
 
 	void atak(boolean mocno) {
 		wobronie1 = false;
-		int atakPkt = atakPunkty(mocno, poziom1, atak1, bronSila1);
-		int obronaPkt = obronaPunkty(wobronie2, poziom2, obrona2);
+		int atakPkt = atakPunkty(mocno, spryt1, atak1, bronSila1);
+		int obronaPkt = obronaPunkty(wobronie2, spryt2, obrona2);
 		int roznicaPkt = Math.max(atakPkt - obronaPkt, 0);
 		roznicaPkt = Math.min(roznicaPkt, zycie2);
 		zycie2 -= roznicaPkt;
@@ -203,8 +212,8 @@ public class WalkaController {
 	void obrona() {
 		// Na razie potwory zawsze atakuj¹ mocno (poni¿ej wartoœæ true) i nigdy
 		// nie przechodz¹ do obrony
-		int atakPkt = atakPunkty(true, poziom2, atak2, bronSila2);
-		int obronaPkt = obronaPunkty(wobronie1, poziom1, obrona1);
+		int atakPkt = atakPunkty(true, spryt2, atak2, bronSila2);
+		int obronaPkt = obronaPunkty(wobronie1, spryt1, obrona1);
 		int roznicaPkt = Math.max(atakPkt - obronaPkt, 0);
 		roznicaPkt = Math.min(roznicaPkt, zycie1);
 		zycie1 -= roznicaPkt;
@@ -213,6 +222,7 @@ public class WalkaController {
 		txtRelacja.setText(nazwa + " atakuje i zadaje " + atakPkt + " obra¿eñ!!\n" + imie + " siê broni z obron¹ "
 				+ obronaPkt + ".\n" + imie + " traci " + roznicaPkt
 				+ " pkt. ¿ycia!\n-----------------------------------------------------------\n" + temp);
+
 		if (zycie1 == 0) {
 			koniecWalki(false);
 		}
@@ -222,7 +232,7 @@ public class WalkaController {
 	void atakAction(MouseEvent event) {
 		myszkoruch = event;
 		atak(true);
-		obrona();
+		anim("atak", true);
 	}
 
 	@FXML
@@ -230,7 +240,7 @@ public class WalkaController {
 		myszkoruch = event;
 		atak(false);
 		specjalny1++;
-		obrona();
+		anim("atak_maly", true);
 	}
 
 	@FXML
@@ -247,21 +257,61 @@ public class WalkaController {
 		String temp = txtRelacja.getText();
 		txtRelacja.setText(
 				imie + " przechodzi do obrony.\n-----------------------------------------------------------\n" + temp);
-		obrona();
+		anim("obrona", true);
+
 	}
-	
-	void koniecWalki(boolean czyZyje){
-		if(czyZyje){
-			Alert loginError = new Alert(AlertType.WARNING);
+
+	void anim(String co, boolean czyJa) {
+
+		String temp = "";
+		double rotacja = 180.0;
+		if (co.equals("obrona")) {
+			temp = "obrona.png";
+			rotacja = 0.0;
+		} else if (co.equals("atak")) {
+			temp = "atak.png";
+		} else if (co.equals("atak_maly")) {
+			temp = "atak_maly.png";
+		}
+
+		Image img = new Image("/app/view/" + temp, 100, 100, true, false);
+		ivAnimacja.setImage(img);
+
+		FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), ivAnimacja);
+		fadeTransition.setFromValue(1.0);
+		fadeTransition.setToValue(0.0);
+		TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), ivAnimacja);
+		translateTransition.setFromX(50);
+		translateTransition.setToX(350);
+		
+		RotateTransition rotateTransition = new
+		RotateTransition(Duration.millis(500), ivAnimacja);
+		rotateTransition.setByAngle(rotacja);
+		
+		ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(500), ivAnimacja);
+		scaleTransition.setFromX(0.8);
+		scaleTransition.setFromY(0.8);
+		scaleTransition.setToX(1.5);
+		scaleTransition.setToY(1.5);
+
+		ParallelTransition parallelTransition = new ParallelTransition();
+		parallelTransition.getChildren().addAll(fadeTransition, translateTransition, rotateTransition, scaleTransition);
+		parallelTransition.setOnFinished(e -> obrona());
+		parallelTransition.play();
+	}
+
+	void koniecWalki(boolean czyZyje) {
+		if (czyZyje) {
+			Alert loginError = new Alert(AlertType.ERROR);
 			loginError.setTitle("WYGRANA!");
 			loginError.setHeaderText("Pokona³eœ stwora!");
 			loginError.setContentText("Pokona³eœ stwora o nazwie " + nazwa.toUpperCase() + "!");
 			PlanszaController.stworki.get(PlanszaController.potworek).setZycie(0);
 			Image kill = new Image("/app/view/kill.png", 60, 60, true, false);
 			PlanszaController.stworki.get(PlanszaController.potworek).setImg_maly(kill);
-			show("PlanszaView","WITCHER 4 : Dzika Zgon");
+			show("PlanszaView", "WITCHER 4 : Dzika Zgon");
 			((Node) (myszkoruch.getSource())).getScene().getWindow().hide();
-		}else{
+		} else {
 			Alert loginError = new Alert(AlertType.WARNING);
 			loginError.setTitle("GAME OVER");
 			loginError.setHeaderText("Zosta³eœ ubity!");
@@ -270,7 +320,7 @@ public class WalkaController {
 			loginError.showAndWait();
 		}
 	}
-	
+
 	private void show(String plik, String tytul) {
 		Stage stejdz = new Stage();
 		Parent rodzic = null;

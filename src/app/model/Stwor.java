@@ -6,19 +6,19 @@ public class Stwor {
 	String nazwa;
 	Image img_maly;
 	Image img_duzy;
-	int poziom;
+	int spryt;
 	int atak;
 	int obrona;
 	String bron;
 	int bronSila;
 	int zycie;
 	
-	public int getPoziom() {
-		return poziom;
+	public int getSpryt() {
+		return spryt;
 	}
 
-	public void setPoziom(int poziom) {
-		this.poziom = poziom;
+	public void setSpryt(int spryt) {
+		this.spryt = spryt;
 	}
 
 	public String getBron() {
@@ -85,12 +85,12 @@ public class Stwor {
 		this.obrona = obrona;
 	}
 
-	public Stwor(String nazwa, Image img_maly, Image img_duzy, int poziom, int atak, int obrona, String bron,
+	public Stwor(String nazwa, Image img_maly, Image img_duzy, int spryt, int atak, int obrona, String bron,
 			int bronSila, int zycie) {
 		this.nazwa = nazwa;
 		this.img_maly = img_maly;
 		this.img_duzy = img_duzy;
-		this.poziom = poziom;
+		this.spryt = spryt;
 		this.atak = atak;
 		this.obrona = obrona;
 		this.bron = bron;

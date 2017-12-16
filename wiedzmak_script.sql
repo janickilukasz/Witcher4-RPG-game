@@ -106,7 +106,7 @@ INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (2,2,7,0,0,0),
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (2,2,8,0,0,0),(2,2,8,1,0,0),(2,2,8,2,0,0),(2,2,8,3,1,0),(2,2,8,4,1,0),(2,2,8,5,1,0),(2,2,8,6,1,0),(2,2,8,7,0,0),(2,2,8,8,0,0),(2,2,8,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (2,2,9,0,0,0),(2,2,9,1,0,0),(2,2,9,2,0,0),(2,2,9,3,0,0),(2,2,9,4,0,0),(2,2,9,5,0,0),(2,2,9,6,0,0),(2,2,9,7,0,0),(2,2,9,8,0,0),(2,2,9,9,0,0);
 
-create table stwory(id smallint primary key, nazwa varchar(30), img_maly varchar(30), img_duzy varchar(30), poziom tinyint, atak tinyint, obrona tinyint, bron varchar(40), bronsila tinyint, zycie smallint);
+create table stwory(id smallint primary key, nazwa varchar(30), img_maly varchar(30), img_duzy varchar(30), spryt tinyint, atak tinyint, obrona tinyint, bron varchar(40), bronsila tinyint, zycie smallint);
 #MAX ŻYCIE TO 210 PKT!!!!!
 INSERT INTO stwory VALUES(1, 'Kura','kura_mala.png','kura.png',1,0,1,'dziób',0,3);
 INSERT INTO stwory VALUES(2, 'Dzik','dzik_maly.png','dzik.png',1,2,1,'kły',1,10);
