@@ -10,16 +10,15 @@ import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -27,6 +26,9 @@ import javafx.util.Duration;
 
 public class WalkaController {
 
+    @FXML
+    private AnchorPane ap;
+	
 	@FXML
 	private ImageView imgZawodnik1;
 
@@ -86,8 +88,19 @@ public class WalkaController {
 
 	@FXML
 	private ImageView ivAnimacja;
+	
+    @FXML
+    private Button btnAtak;
 
-	MouseEvent myszkoruch;
+    @FXML
+    private Button btnAtakMaly;
+
+    @FXML
+    private Button btnObrona;
+
+    @FXML
+    private Button btnSpecial;
+
 
 	String imie;
 	int spryt1;
@@ -113,6 +126,7 @@ public class WalkaController {
 	boolean wobronie2 = false;
 
 	public void initialize() {
+		System.out.println("initialize");
 		imie = PlanszaController.imie;
 		spryt1 = PlanszaController.spryt;
 		atak1 = PlanszaController.atak;
@@ -132,6 +146,7 @@ public class WalkaController {
 		imgZawodnik2.setImage(img_potwor);
 
 		statystyki();
+		paskiZycia();
 		if (spryt2 > spryt1) {
 			txtRelacja.setText(
 					"Stwór o nazwie " + nazwa.toUpperCase() + " jest sprytniejszy od Ciebie i to on zaczyna walkê!");
@@ -154,6 +169,7 @@ public class WalkaController {
 	}
 
 	private void statystyki() {
+		System.out.println("statystyki");
 		lblNazwa1.setText("WiedŸmin " + imie);
 		lblSpryt1.setText("" + spryt1);
 		lblAtak1.setText("" + atak1);
@@ -165,10 +181,11 @@ public class WalkaController {
 		lblAtak2.setText("" + atak2);
 		lblObrona2.setText("" + obrona2);
 		lblBron2.setText(bron2 + " (" + bronSila2 + ")");
-		paskiZycia();
+		
 	}
 
 	private void paskiZycia() {
+		System.out.println("paski ¿ycia");
 		lblPkt1.setText("" + zycie1);
 		lblPkt2.setText("" + zycie2);
 		lblPkt1.setLayoutX(zycie1 + 20);
@@ -189,6 +206,7 @@ public class WalkaController {
 	}
 
 	int atakPunkty(boolean mocno, int spryt, int atak, int bronSila) {
+		System.out.println("atakPunkty");
 		Random los = new Random();
 		double mnoznik = (mocno ? 1 : 0) * 0.5 + los.nextDouble() / 2;
 		int atakPkt = (int) Math.round((spryt * atak + bronSila) * mnoznik);
@@ -197,6 +215,7 @@ public class WalkaController {
 	}
 
 	int obronaPunkty(boolean wobronie, int spryt, int obrona) {
+		System.out.println("obronaPunkty");
 		Random los = new Random();
 		double mnoznik = (wobronie ? 1 : 0) * 0.5 + los.nextDouble();
 		int obronaPkt = (int) Math.round(spryt * obrona * mnoznik);
@@ -205,6 +224,7 @@ public class WalkaController {
 	}
 
 	int atakSpecjalnyPunkty(int spryt, int atak, int bronSila, int specjalny) {
+		System.out.println("atakSpecjalnyPunkty");
 		Random los = new Random();
 		double mnoznik = 0.5 * Math.pow(1.2, (double) specjalny) - 0.3 + (los.nextDouble() / 7) * specjalny;
 		int atakPkt = (int) Math.round((spryt * atak + bronSila) * mnoznik);
@@ -213,6 +233,7 @@ public class WalkaController {
 	}
 
 	void atak(boolean mocno) {
+		System.out.println("atak");
 		wobronie1 = false;
 		int atakPkt = atakPunkty(mocno, spryt1, atak1, bronSila1);
 		int obronaPkt = obronaPunkty(wobronie2, spryt2, obrona2);
@@ -224,12 +245,10 @@ public class WalkaController {
 		txtRelacja.setText(imie + " atakuje i zadaje " + atakPkt + " obra¿eñ!!\n" + nazwa + " siê broni z obron¹ "
 				+ obronaPkt + "\n" + nazwa + " traci " + roznicaPkt
 				+ " pkt. ¿ycia!\n-----------------------------------------------------------\n" + temp);
-		if (zycie2 == 0) {
-			koniecWalki(true);
-		}
 	}
 
 	void atakSpecjalny() {
+		System.out.println("atakSpecjalny");
 		wobronie1 = false;
 		int atakPkt = atakSpecjalnyPunkty(spryt1, atak1, bronSila1, specjalny1);
 		int obronaPkt = obronaPunkty(wobronie2, spryt2, obrona2);
@@ -241,28 +260,28 @@ public class WalkaController {
 		txtRelacja.setText(imie + " atakuje i zadaje " + atakPkt + " obra¿eñ!!\n" + nazwa + " siê broni z obron¹ "
 				+ obronaPkt + "\n" + nazwa + " traci " + roznicaPkt
 				+ " pkt. ¿ycia!\n-----------------------------------------------------------\n" + temp);
-		if (zycie2 == 0) {
-			koniecWalki(true);
-		}
+
 	}
-	
+
 	void obrona() {
+		System.out.println("obrona");
 		// Nazwa tej metody jest myl¹ca, bo to jest po prostu ruch stwora
 		Random los = new Random();
 		double rzut = los.nextDouble();
 		int atakPkt;
 		boolean flaga = false;
+		String dzialanie;
 		if (rzut < 0.25) {
-			anim("atak", false);
+			dzialanie = "atak";
 			atakPkt = atakPunkty(true, spryt2, atak2, bronSila2);
 		} else if (rzut < 0.5) {
-			anim("atak_maly", false);
+			dzialanie = "atak_maly";
 			atakPkt = atakPunkty(false, spryt2, atak2, bronSila2);
 			if (specjalny2 < 11) {
 				specjalny2++;
 			}
 		} else if (rzut < 0.75) {
-			anim("obrona", false);
+			dzialanie = "obrona";
 			atakPkt = 0;
 			flaga = true;
 			wobronie2 = true;
@@ -273,10 +292,11 @@ public class WalkaController {
 				specjalny2 = 11;
 			}
 		} else {
-			anim("atak_special", false);
+			dzialanie = "atak_special";
 			atakPkt = atakSpecjalnyPunkty(spryt2, atak2, bronSila2, specjalny2);
 			specjalny2 = 0;
 		}
+		System.out.println("Stwór zrobi³ " + dzialanie);
 		int obronaPkt = obronaPunkty(wobronie1, spryt1, obrona1);
 		int roznicaPkt = Math.max(atakPkt - obronaPkt, 0);
 		roznicaPkt = Math.min(roznicaPkt, zycie1);
@@ -292,21 +312,20 @@ public class WalkaController {
 					+ obronaPkt + ".\n" + imie + " traci " + roznicaPkt
 					+ " pkt. ¿ycia!\n-----------------------------------------------------------\n" + temp);
 		}
-		if (zycie1 == 0) {
-			koniecWalki(false);
-		}
+		anim(dzialanie, false);
+
 	}
 
 	@FXML
 	void atakAction(MouseEvent event) {
-		myszkoruch = event;
+		System.out.println("atakAction");
 		atak(true);
 		anim("atak", true);
 	}
 
 	@FXML
 	void atakMniejszyAction(MouseEvent event) {
-		myszkoruch = event;
+		System.out.println("atakMniejszyAction");
 		atak(false);
 		if (specjalny1 < 11) {
 			specjalny1++;
@@ -316,7 +335,7 @@ public class WalkaController {
 
 	@FXML
 	void ciosSpecjalnyAction(MouseEvent event) {
-		myszkoruch = event;
+		System.out.println("ciosSpecjalnyAction");
 		atakSpecjalny();
 		specjalny1 = 0;
 		anim("atak_special", true);
@@ -324,7 +343,7 @@ public class WalkaController {
 
 	@FXML
 	void obronaAction(MouseEvent event) {
-		myszkoruch = event;
+		System.out.println("obronaAction");
 		wobronie1 = true;
 		if (specjalny1 < 9) {
 			specjalny1 += 3;
@@ -340,7 +359,11 @@ public class WalkaController {
 	}
 
 	void anim(String co, boolean czyJa) {
-
+		System.out.println("anim");
+		btnAtak.setDisable(true);
+		btnAtakMaly.setDisable(true);
+		btnObrona.setDisable(true);
+		btnSpecial.setDisable(true);
 		String temp = "";
 		double rotacja = 180.0;
 		if (co.equals("obrona")) {
@@ -385,37 +408,43 @@ public class WalkaController {
 		parallelTransition.getChildren().addAll(fadeTransition, translateTransition, rotateTransition, scaleTransition);
 		// Linijka ni¿ej pozwala na wykonanie kolejnej metody dopiero po
 		// ukoñczeniu animacji
-		if (czyJa) {
-			parallelTransition.setOnFinished(e -> obrona());
-		}
+		parallelTransition.setOnFinished(e -> sprawdzenie(czyJa));
 		parallelTransition.play();
 	}
 
+	void sprawdzenie(boolean czyAtak) {
+		System.out.println("sprawdzenie"+zycie1+","+zycie2);
+		if (zycie1 == 0) {
+			koniecWalki(false);
+		} else if (zycie2 == 0) {
+			koniecWalki(true);
+		} else if (czyAtak){
+			obrona();
+			
+		} else {
+		btnAtak.setDisable(false);
+		btnAtakMaly.setDisable(false);
+		btnObrona.setDisable(false);
+		btnSpecial.setDisable(false);}
+	}
+
 	void koniecWalki(boolean czyZyje) {
-		Alert info;
+		System.out.println("koniecWalki");
 		if (czyZyje) {
-			info = new Alert(AlertType.CONFIRMATION);
-			info.setTitle("WYGRANA!");
-			info.setHeaderText("Pokona³eœ stwora!");
-			info.setContentText("Pokona³eœ stwora o nazwie " + nazwa.toUpperCase() + "!");
 			PlanszaController.stworki.get(PlanszaController.potworek).setZycie(0);
 			Image kill = new Image("/app/view/kill.png", 60, 60, true, false);
 			PlanszaController.stworki.get(PlanszaController.potworek).setImg_maly(kill);
 			PlanszaController.zycie = zycie1;
-			show("PlanszaView", "WITCHER 4 : Dzika Zgon");
-			((Node) (myszkoruch.getSource())).getScene().getWindow().hide();
+			show("Wygrana", "Zwyciêstwo!");
 		} else {
-			info = new Alert(AlertType.WARNING);
-			info.setTitle("GAME OVER");
-			info.setHeaderText("Zosta³eœ ubity!");
-			info.setContentText("Pokona³ Ciê stwór o nazwie " + nazwa.toUpperCase());
-			((Node) (myszkoruch.getSource())).getScene().getWindow().hide();
-			
+			show("GameOver", "GAME OVER");
 		}
-		info.showAndWait();
+
+		ap.getScene().getWindow().hide();
 	}
 
 	private void show(String plik, String tytul) {
+		System.out.println("show");
 		Stage stejdz = new Stage();
 		Parent rodzic = null;
 		try {

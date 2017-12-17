@@ -54,7 +54,7 @@ INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,0,9,0,100,0
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,1,0,0,0,0),(1,1,0,1,0,0),(1,1,0,2,0,0),(1,1,0,3,0,0),(1,1,0,4,0,0),(1,1,0,5,0,0),(1,1,0,6,0,0),(1,1,0,7,0,0),(1,1,0,8,0,0),(1,1,0,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,1,1,0,0,0),(1,1,1,1,0,0),(1,1,1,2,1,0),(1,1,1,3,1,0),(1,1,1,4,1,0),(1,1,1,5,1,0),(1,1,1,6,1,0),(1,1,1,7,0,0),(1,1,1,8,0,0),(1,1,1,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,1,2,0,0,0),(1,1,2,1,0,0),(1,1,2,2,1,0),(1,1,2,3,0,0),(1,1,2,4,0,0),(1,1,2,5,0,0),(1,1,2,6,0,0),(1,1,2,7,0,0),(1,1,2,8,0,0),(1,1,2,9,0,0);
-INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,1,3,0,0,0),(1,1,3,1,0,0),(1,1,3,2,1,0),(1,1,3,3,0,0),(1,1,3,4,0,0),(1,1,3,5,0,0),(1,1,3,6,0,0),(1,1,3,7,0,0),(1,1,3,8,0,0),(1,1,3,9,0,0);
+INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,1,3,0,0,0),(1,1,3,1,0,0),(1,1,3,2,1,0),(1,1,3,3,0,0),(1,1,3,4,0,0),(1,1,3,5,0,3),(1,1,3,6,0,0),(1,1,3,7,0,0),(1,1,3,8,0,0),(1,1,3,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,1,4,0,0,0),(1,1,4,1,0,0),(1,1,4,2,1,0),(1,1,4,3,0,0),(1,1,4,4,1,0),(1,1,4,5,1,0),(1,1,4,6,0,0),(1,1,4,7,0,0),(1,1,4,8,0,0),(1,1,4,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,1,5,0,0,0),(1,1,5,1,0,0),(1,1,5,2,1,0),(1,1,5,3,1,0),(1,1,5,4,0,0),(1,1,5,5,0,0),(1,1,5,6,1,0),(1,1,5,7,0,0),(1,1,5,8,0,0),(1,1,5,9,0,0);
 INSERT INTO pola(planszax, planszay, x , y, rodzaj, stwor) VALUES (1,1,6,0,0,0),(1,1,6,1,0,0),(1,1,6,2,0,0),(1,1,6,3,0,0),(1,1,6,4,0,0),(1,1,6,5,0,0),(1,1,6,6,1,0),(1,1,6,7,0,0),(1,1,6,8,0,0),(1,1,6,9,0,0);
@@ -110,6 +110,7 @@ create table stwory(id smallint primary key, nazwa varchar(30), img_maly varchar
 #MAX ŻYCIE TO 210 PKT!!!!!
 INSERT INTO stwory VALUES(1, 'Kura','kura_mala.png','kura.png',1,0,1,'dziób',0,3);
 INSERT INTO stwory VALUES(2, 'Dzik','dzik_maly.png','dzik.png',1,2,1,'kły',1,10);
+INSERT INTO stwory VALUES(3, 'Szczur','szczurek_maly.png','szczurek.png',4,4,1,'zęby',1,8);
 
 create table przeszkody(id smallint primary key, nazwa varchar(30), img varchar(30));
 INSERT INTO przeszkody VALUES (100, 'drzewo1','tree1.png');

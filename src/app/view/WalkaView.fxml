@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.WalkaController">
+<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.WalkaController">
    <children>
       <ImageView fx:id="imgZawodnik1" fitHeight="200.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -96,10 +96,10 @@
       <Rectangle fx:id="recZycie2" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="12.0" layoutX="376.0" layoutY="246.0" stroke="BLACK" strokeType="INSIDE" width="210.0" />
       <Label fx:id="lblPkt1" layoutX="227.0" layoutY="244.0" text="40" />
       <Label fx:id="lblPkt2" layoutX="360.0" layoutY="244.0" text="40" />
-      <Button layoutX="260.0" layoutY="138.0" mnemonicParsing="false" onMouseClicked="#atakAction" prefHeight="53.0" prefWidth="83.0" text="ATAK" />
-      <Button layoutX="260.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#atakMniejszyAction" prefHeight="53.0" prefWidth="83.0" text="ATAK, ALE MNIEJSZY" textAlignment="CENTER" wrapText="true" />
-      <Button layoutX="260.0" layoutY="264.0" mnemonicParsing="false" onMouseClicked="#obronaAction" prefHeight="53.0" prefWidth="83.0" text="OBRONA" />
-      <Button layoutX="260.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#ciosSpecjalnyAction" prefHeight="53.0" prefWidth="83.0" text="CIOS SPECJALNY" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btnAtak" layoutX="260.0" layoutY="138.0" mnemonicParsing="false" onMouseClicked="#atakAction" prefHeight="53.0" prefWidth="83.0" text="ATAK" />
+      <Button fx:id="btnAtakMaly" layoutX="260.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#atakMniejszyAction" prefHeight="53.0" prefWidth="83.0" text="ATAK, ALE MNIEJSZY" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btnObrona" layoutX="260.0" layoutY="264.0" mnemonicParsing="false" onMouseClicked="#obronaAction" prefHeight="53.0" prefWidth="83.0" text="OBRONA" />
+      <Button fx:id="btnSpecial" layoutX="260.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#ciosSpecjalnyAction" prefHeight="53.0" prefWidth="83.0" text="CIOS SPECJALNY" textAlignment="CENTER" wrapText="true" />
       <TextArea fx:id="txtRelacja" layoutX="142.0" layoutY="396.0" prefHeight="129.0" prefWidth="316.0" wrapText="true" />
       <Label layoutX="26.0" layoutY="357.0" text="SPRYT:">
          <font>
