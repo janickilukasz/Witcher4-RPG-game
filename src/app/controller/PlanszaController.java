@@ -12,17 +12,22 @@ import app.database.DBConnector;
 import app.model.Pole;
 import app.model.Przeszkoda;
 import app.model.Stwor;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class PlanszaController {
@@ -35,6 +40,7 @@ public class PlanszaController {
 	static int obrona = 2;
 	static String bron = "rêce";
 	static int bronSila = 0;
+	//Maksymalne ¿ycie to 210 pkt!
 	static int zycie = 8;
 	static int x = 3;
 	static int y = 4;
@@ -54,19 +60,58 @@ public class PlanszaController {
 	DBConnector db;
 	ResultSet rs;
 
+    @FXML
+    private ImageView iv_postac;
+    
+    @FXML
+    private Label lbl_imie;
+    
+    @FXML
+    private Rectangle recZycie;
+
+    @FXML
+    private Label lblZycie;
+	
 	@FXML
 	private GridPane gp;
 
 	@FXML
-	private Label lbl_Test;
+	private Label lbl_Atak;
+
+	@FXML
+	private Label lbl_Obrona;
+
+	@FXML
+	private Label lbl_Spryt;
+
+	@FXML
+	private Label lbl_Bron;
+
+	@FXML
+	private TextArea ta_info;
 
 	public void initialize() {
 		wiedzmin = new ImageView();
 		plansza = new ArrayList<Pole>();
+		iv_postac.setImage(new Image("/app/view/wiedzmak.png", 160, 180, true, false));
+		lbl_imie.setText("WiedŸmak " + imie.toUpperCase());
+		pokaz_statystyki();
 		przeszkody_sql();
 		nowa_plansza();
 	}
 
+	public void pokaz_statystyki(){
+		lbl_Atak.setText("ATAK: " + atak);
+		lbl_Obrona.setText("OBRONA: " + obrona);
+		lbl_Spryt.setText("SPRYT: " + spryt);
+		lbl_Bron.setText("BROÑ: " + bron + "(" + bronSila + ")");
+		recZycie.setWidth((int)140*zycie/210);
+		int g = (int) Math.round(255 * (zycie / 210.0));
+		recZycie.setFill(Color.rgb(255, g, 0));
+		lblZycie.setText("" + zycie);
+		lblZycie.setLayoutX((int)140*zycie/210+20);
+	}
+	
 	public void nowa_plansza() {
 		gp.getChildren().clear();
 		dane_z_sql();
@@ -107,6 +152,17 @@ public class PlanszaController {
 				ImageView potwor = new ImageView();
 				potwor.setImage(stwor);
 				gp.add(potwor, i.getY(), i.getX());
+				//TEST
+				EventHandler<MouseEvent> eee = new EventHandler<MouseEvent>(){  
+					   @Override 
+					   public void handle(MouseEvent e) { 
+					      System.out.println("Testowanko");
+					      System.out.println(i.getId());
+					   } 
+					};
+					potwor.addEventHandler(MouseEvent.MOUSE_ENTERED, eee);
+				//KONIEC TESTU
+					
 			}
 
 			// Inicjalizacja postaci
@@ -114,7 +170,7 @@ public class PlanszaController {
 		}
 		showPostac("dol");
 	}
-
+	
 	private void dane_z_sql() {
 		polacz();
 
@@ -139,8 +195,9 @@ public class PlanszaController {
 			polacz();
 			ps = conn.prepareStatement("SELECT * FROM przeszkody");
 			rs = ps.executeQuery();
-			while(rs.next()){
-				przeszkody.put(rs.getInt("id"), new Przeszkoda(rs.getInt("id"), rs.getString("nazwa"), rs.getString("img")));
+			while (rs.next()) {
+				przeszkody.put(rs.getInt("id"),
+						new Przeszkoda(rs.getInt("id"), rs.getString("nazwa"), rs.getString("img")));
 			}
 		} catch (SQLException e) {
 			System.out.println("B³¹d przy pobieraniu przeszkód z SQL");
@@ -273,10 +330,57 @@ public class PlanszaController {
 		}
 
 		if (walka) {
-			lbl_Test.setText("MONSTER WYKRYTY!");
 			show("WalkaView", "Walka!");
 			((Node) (event.getSource())).getScene().getWindow().hide();
 		}
 		showPostac(kierunek);
 	}
+
+	@FXML
+	void atakOnAction(MouseEvent event) {
+		instrukcje(lbl_Atak, "Instrukcja atak");
+	}
+
+	@FXML
+	void atakOffAction(MouseEvent event) {
+		ta_info.setVisible(false);
+	}
+
+	@FXML
+	void obronaOnAction(MouseEvent event) {
+		instrukcje(lbl_Obrona, "Instrukcja obrona test test test test test test test test test");
+	}
+
+	@FXML
+	void obronaOffAction(MouseEvent event) {
+		ta_info.setVisible(false);
+	}
+
+	@FXML
+	void sprytOnAction(MouseEvent event) {
+		instrukcje(lbl_Spryt, "Opis spryt");
+	}
+
+	@FXML
+	void sprytOffAction(MouseEvent event) {
+		ta_info.setVisible(false);
+	}
+
+	@FXML
+	void bronOnAction(MouseEvent event) {
+		instrukcje(lbl_Bron, "Opis broni");
+	}
+
+	@FXML
+	void bronOffAction(MouseEvent event) {
+		ta_info.setVisible(false);
+	}
+
+	void instrukcje(Label lbl, String tekst) {
+		ta_info.setLayoutX(lbl.getLayoutX() + 30);
+		ta_info.setLayoutY(lbl.getLayoutY() + 30);
+		ta_info.setText(tekst);
+		ta_info.setVisible(true);
+	}
+
 }
