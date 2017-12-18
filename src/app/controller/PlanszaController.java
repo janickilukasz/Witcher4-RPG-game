@@ -34,13 +34,13 @@ public class PlanszaController {
 
 	Image wiedzmin_img;
 	ImageView wiedzmin;
-	static String imie = "Jasio";
+	static String imie = StartView.imie;
 	static int spryt = 1;
 	static int atak = 2;
 	static int obrona = 2;
 	static String bron = "rêce";
 	static int bronSila = 0;
-	//Maksymalne ¿ycie to 210 pkt!
+	// Maksymalne ¿ycie to 210 pkt!
 	static int zycie = 8;
 	static int x = 3;
 	static int y = 4;
@@ -60,18 +60,18 @@ public class PlanszaController {
 	DBConnector db;
 	ResultSet rs;
 
-    @FXML
-    private ImageView iv_postac;
-    
-    @FXML
-    private Label lbl_imie;
-    
-    @FXML
-    private Rectangle recZycie;
+	@FXML
+	private ImageView iv_postac;
 
-    @FXML
-    private Label lblZycie;
-	
+	@FXML
+	private Label lbl_imie;
+
+	@FXML
+	private Rectangle recZycie;
+
+	@FXML
+	private Label lblZycie;
+
 	@FXML
 	private GridPane gp;
 
@@ -90,6 +90,9 @@ public class PlanszaController {
 	@FXML
 	private TextArea ta_info;
 
+	@FXML
+	private TextArea ta_stwor;
+
 	public void initialize() {
 		wiedzmin = new ImageView();
 		plansza = new ArrayList<Pole>();
@@ -100,18 +103,18 @@ public class PlanszaController {
 		nowa_plansza();
 	}
 
-	public void pokaz_statystyki(){
+	public void pokaz_statystyki() {
 		lbl_Atak.setText("ATAK: " + atak);
 		lbl_Obrona.setText("OBRONA: " + obrona);
 		lbl_Spryt.setText("SPRYT: " + spryt);
 		lbl_Bron.setText("BROÑ: " + bron + "(" + bronSila + ")");
-		recZycie.setWidth((int)140*zycie/210);
+		recZycie.setWidth((int) 140 * zycie / 210);
 		int g = (int) Math.round(255 * (zycie / 210.0));
 		recZycie.setFill(Color.rgb(255, g, 0));
 		lblZycie.setText("" + zycie);
-		lblZycie.setLayoutX((int)140*zycie/210+20);
+		lblZycie.setLayoutX((int) 140 * zycie / 210 + 20);
 	}
-	
+
 	public void nowa_plansza() {
 		gp.getChildren().clear();
 		dane_z_sql();
@@ -152,17 +155,45 @@ public class PlanszaController {
 				ImageView potwor = new ImageView();
 				potwor.setImage(stwor);
 				gp.add(potwor, i.getY(), i.getX());
-				//TEST
-				EventHandler<MouseEvent> eee = new EventHandler<MouseEvent>(){  
-					   @Override 
-					   public void handle(MouseEvent e) { 
-					      System.out.println("Testowanko");
-					      System.out.println(i.getId());
-					   } 
-					};
-					potwor.addEventHandler(MouseEvent.MOUSE_ENTERED, eee);
-				//KONIEC TESTU
-					
+				// Dodawanie handlerów do pokazywania info na temat stworków
+				EventHandler<MouseEvent> in = new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent e) {
+						Stwor st = stworki.get(i.getId());
+
+						String n = st.getNazwa();
+						String temp = n.toUpperCase() + "\nstwór ubit";
+						if (st.getZycie() > 0) {
+							String a = "?";
+							String o = "?";
+							String s = "?";
+							String bs = "?";
+							String z = "?";
+							if (spryt >= stworki.get(i.getId()).getSpryt()) {
+								a = "" + st.getAtak();
+								o = "" + st.getObrona();
+								s = "" + st.getSpryt();
+								bs = "" + st.getBronSila();
+								z = "" + st.getZycie();
+							}
+							temp = n.toUpperCase() + "\nA: " + a + "\tO: " + o + "\nS: " + s + "\tB: " + bs + "\n¯: "
+									+ z;
+						}
+						ta_stwor.setText(temp);
+						ta_stwor.setLayoutX(potwor.getLayoutX() + 250);
+						ta_stwor.setLayoutY(potwor.getLayoutY() + 50);
+						ta_stwor.setVisible(true);
+					}
+				};
+				EventHandler<MouseEvent> out = new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent e) {
+						ta_stwor.setVisible(false);
+					}
+				};
+				potwor.addEventHandler(MouseEvent.MOUSE_ENTERED, in);
+				potwor.addEventHandler(MouseEvent.MOUSE_EXITED, out);
+
 			}
 
 			// Inicjalizacja postaci
@@ -170,7 +201,7 @@ public class PlanszaController {
 		}
 		showPostac("dol");
 	}
-	
+
 	private void dane_z_sql() {
 		polacz();
 
@@ -338,7 +369,7 @@ public class PlanszaController {
 
 	@FXML
 	void atakOnAction(MouseEvent event) {
-		instrukcje(lbl_Atak, "Instrukcja atak");
+		instrukcje(lbl_Atak, "ATAK odpowiedzialny jest za liczbê zadanych pkt obra¿eñ podczas walki");
 	}
 
 	@FXML
@@ -348,7 +379,7 @@ public class PlanszaController {
 
 	@FXML
 	void obronaOnAction(MouseEvent event) {
-		instrukcje(lbl_Obrona, "Instrukcja obrona test test test test test test test test test");
+		instrukcje(lbl_Obrona, "OBRONA odpowiedzialna jest za liczbê pkt obrony podczas walki");
 	}
 
 	@FXML
@@ -358,7 +389,7 @@ public class PlanszaController {
 
 	@FXML
 	void sprytOnAction(MouseEvent event) {
-		instrukcje(lbl_Spryt, "Opis spryt");
+		instrukcje(lbl_Spryt, "SPRYT ma znaczenie podczas ataku oraz pozwala na rozpoznanie przeciwnika");
 	}
 
 	@FXML
@@ -368,7 +399,7 @@ public class PlanszaController {
 
 	@FXML
 	void bronOnAction(MouseEvent event) {
-		instrukcje(lbl_Bron, "Opis broni");
+		instrukcje(lbl_Bron, "Si³a noszonej broni pozwala zadaæ dodatkowe obra¿enia podczas walki");
 	}
 
 	@FXML

@@ -39,34 +39,35 @@
             <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <Label fx:id="lbl_Atak" layoutX="16.0" layoutY="238.0" onMouseEntered="#atakOnAction" onMouseExited="#atakOffAction" prefHeight="41.0" prefWidth="82.0" text="ATAK:">
+      <Label fx:id="lbl_Atak" layoutX="16.0" layoutY="269.0" onMouseEntered="#atakOnAction" onMouseExited="#atakOffAction" prefHeight="41.0" prefWidth="82.0" text="ATAK:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
-      <Label fx:id="lbl_Obrona" layoutX="16.0" layoutY="278.0" onMouseEntered="#obronaOnAction" onMouseExited="#obronaOffAction" prefHeight="41.0" prefWidth="100.0" text="OBRONA:">
+      <Label fx:id="lbl_Obrona" layoutX="16.0" layoutY="309.0" onMouseEntered="#obronaOnAction" onMouseExited="#obronaOffAction" prefHeight="41.0" prefWidth="100.0" text="OBRONA:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <Button layoutX="12.0" layoutY="568.0" mnemonicParsing="false" onKeyPressed="#keyPressAction" opacity="0.0" prefHeight="26.0" prefWidth="0.0" text="Button" />
-      <Label fx:id="lbl_Spryt" layoutX="16.0" layoutY="318.0" onMouseEntered="#sprytOnAction" onMouseExited="#sprytOffAction" prefHeight="41.0" prefWidth="100.0" text="SPRYT:">
+      <Label fx:id="lbl_Spryt" layoutX="16.0" layoutY="349.0" onMouseEntered="#sprytOnAction" onMouseExited="#sprytOffAction" prefHeight="41.0" prefWidth="100.0" text="SPRYT:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_Bron" layoutX="15.0" layoutY="358.0" onMouseEntered="#bronOnAction" onMouseExited="#bronOffAction" prefHeight="41.0" prefWidth="178.0" text="BROŃ:">
+      <Label fx:id="lbl_Bron" layoutX="15.0" layoutY="389.0" onMouseEntered="#bronOnAction" onMouseExited="#bronOffAction" prefHeight="41.0" prefWidth="178.0" text="BROŃ:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextArea fx:id="ta_info" layoutX="45.0" layoutY="220.0" prefHeight="97.0" prefWidth="100.0" text="test test test test test test test test test test test" visible="false" wrapText="true" />
+      <TextArea fx:id="ta_info" editable="false" layoutX="45.0" layoutY="220.0" prefHeight="79.0" prefWidth="148.0" text="test test test test test test test test test test test" visible="false" wrapText="true" />
       <ImageView fx:id="iv_postac" fitHeight="180.0" fitWidth="160.0" layoutX="9.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="lbl_imie" alignment="CENTER" layoutX="3.0" layoutY="193.0" prefHeight="41.0" prefWidth="192.0" text="xxxxx">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Rectangle fx:id="recZycie" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="12.0" layoutX="9.0" layoutY="227.0" stroke="BLACK" strokeType="INSIDE" width="140.0" />
-      <Label fx:id="lblZycie" layoutX="157.0" layoutY="225.0" text="40" />
+      <Rectangle fx:id="recZycie" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="12.0" layoutX="9.0" layoutY="239.0" stroke="BLACK" strokeType="INSIDE" width="140.0" />
+      <Label fx:id="lblZycie" layoutX="157.0" layoutY="237.0" text="40" />
+      <TextArea fx:id="ta_stwor" editable="false" layoutX="98.0" layoutY="462.0" prefHeight="79.0" prefWidth="73.0" visible="false" />
    </children>
 </AnchorPane>
