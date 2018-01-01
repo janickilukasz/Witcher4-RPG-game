@@ -297,6 +297,8 @@ public class PlanszaController {
 
 	@FXML
 	void keyPressAction(KeyEvent event) {
+		ta_info.setVisible(false);
+		ta_stwor.setVisible(false);
 		String kierunek = "";
 		boolean walka = false;
 		if (event.getCode() == KeyCode.UP) {
