@@ -7,13 +7,15 @@ public class Pole {
 	private static int nr_planszy;
 	private int x;
 	private int y;
+	private int podloze;
 	private int rodzaj;
 	private int stwor;
 
-	public Pole(int id, int x, int y, int rodzaj, int stwor) {
+	public Pole(int id, int x, int y, int podloze, int rodzaj, int stwor) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
+		this.podloze = podloze;
 		this.rodzaj = rodzaj;
 		this.stwor = stwor;
 	}
@@ -48,6 +50,14 @@ public class Pole {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+
+	public int getPodloze() {
+		return podloze;
+	}
+
+	public void setPodloze(int podloze) {
+		this.podloze = podloze;
 	}
 
 	public int getRodzaj() {

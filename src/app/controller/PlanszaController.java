@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import app.database.DBConnector;
+import app.model.Podloze;
 import app.model.Pole;
 import app.model.Przeszkoda;
 import app.model.Stwor;
@@ -42,16 +43,24 @@ public class PlanszaController {
 	static int bronSila = 0;
 	// Maksymalne ¿ycie to 210 pkt!
 	static int zycie = 8;
+	// wspolrzedna x na której jest wiedzmin
 	static int x = 3;
+	// wspolrzedna y na której jest wiedzmin
 	static int y = 4;
+	// rozmiar planszy
 	static int ile_pol = 10;
+	// wspolrzedna x pokazywanej planszy
 	static int nr_planszyX = 0;
+	// wspolrzedna y pokazywanej planszy
 	static int nr_planszyY = 0;
+	// rozmiar ca³ego œwiata
 	static int ile_plansz = 3;
 
+	// zmienna, która przekazuje numer potworka do widoku "Walka"
 	static int potworek = 0;
 
 	ArrayList<Pole> plansza;
+	static HashMap<Integer, Podloze> podloza = new HashMap<Integer, Podloze>();
 	static HashMap<Integer, Przeszkoda> przeszkody = new HashMap<Integer, Przeszkoda>();
 	static HashMap<Integer, Stwor> stworki = new HashMap<Integer, Stwor>();
 
@@ -99,6 +108,7 @@ public class PlanszaController {
 		iv_postac.setImage(new Image("/app/view/wiedzmak.png", 160, 180, true, false));
 		lbl_imie.setText("WiedŸmak " + imie.toUpperCase());
 		pokaz_statystyki();
+		podloza_sql();
 		przeszkody_sql();
 		nowa_plansza();
 	}
@@ -120,12 +130,13 @@ public class PlanszaController {
 		dane_z_sql();
 		// Wyœwietlanie danych na planszy
 		for (Pole i : plansza) {
-			Image trawa = new Image("/app/view/trawa.jpg", 60, 60, true, false);
-			ImageView iv_trawa = new ImageView(trawa);
-			gp.add(iv_trawa, i.getY(), i.getX());
+			Image pod = new Image("/app/view/" + podloza.get(i.getPodloze()).getPlik(), 60, 60, true, false);
+			ImageView iv_pod = new ImageView(pod);
+			iv_pod.setRotate(podloza.get(i.getPodloze()).getRotacja());
+			gp.add(iv_pod, i.getY(), i.getX());
 
 			// Dodawanie przeszkód
-			if (i.getRodzaj() >= 100) {
+			if (i.getRodzaj() > 0) {
 				Image img = new Image("/app/view/" + przeszkody.get(i.getRodzaj()).getPlik(), 60, 60, true, false);
 				ImageView iv = new ImageView(img);
 				gp.add(iv, i.getY(), i.getX());
@@ -213,8 +224,8 @@ public class PlanszaController {
 			rs = ps.executeQuery();
 			plansza.clear();
 			while (rs.next()) {
-				plansza.add(new Pole(rs.getInt("id"), rs.getInt("x"), rs.getInt("y"), rs.getInt("rodzaj"),
-						rs.getInt("stwor")));
+				plansza.add(new Pole(rs.getInt("id"), rs.getInt("x"), rs.getInt("y"), rs.getInt("podloze"),
+						rs.getInt("rodzaj"), rs.getInt("stwor")));
 			}
 		} catch (SQLException e) {
 			System.out.println("B³¹d podczas preparowania zapytania!");
@@ -229,6 +240,20 @@ public class PlanszaController {
 			while (rs.next()) {
 				przeszkody.put(rs.getInt("id"),
 						new Przeszkoda(rs.getInt("id"), rs.getString("nazwa"), rs.getString("img")));
+			}
+		} catch (SQLException e) {
+			System.out.println("B³¹d przy pobieraniu przeszkód z SQL");
+		}
+	}
+
+	private void podloza_sql() {
+		try {
+			polacz();
+			ps = conn.prepareStatement("SELECT * FROM podloza");
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				podloza.put(rs.getInt("id"),
+						new Podloze(rs.getInt("id"), rs.getString("nazwa"), rs.getString("img"), rs.getInt("rotacja")));
 			}
 		} catch (SQLException e) {
 			System.out.println("B³¹d przy pobieraniu przeszkód z SQL");
@@ -254,6 +279,7 @@ public class PlanszaController {
 		}
 	}
 
+	// Metoda zwraca numer przeszkody
 	private int jakiRodzaj(int x, int y) {
 		for (Pole i : plansza) {
 			if (x == i.getX() && y == i.getY()) {
@@ -263,6 +289,7 @@ public class PlanszaController {
 		return 0;
 	}
 
+	// Metoda zwraca numer potworka
 	private int jakiPotwor(int x, int y) {
 		for (Pole i : plansza) {
 			if (x == i.getX() && y == i.getY()) {
@@ -272,6 +299,8 @@ public class PlanszaController {
 		return 0;
 	}
 
+	// Metoda zwraca id danego pola (co jest jednoczeœnie kluczem potwora na
+	// liœcie potworów)
 	private int jakieId(int x, int y) {
 		for (Pole i : plansza) {
 			if (x == i.getX() && y == i.getY()) {
@@ -302,8 +331,7 @@ public class PlanszaController {
 		String kierunek = "";
 		boolean walka = false;
 		if (event.getCode() == KeyCode.UP) {
-			// TUTAJ PONI¯EJ ZAMIAST FALSE TRZEBA DAÆ ZYCIE STWORKA
-			if (x > 0 && jakiRodzaj(x - 1, y) < 100
+			if (x > 0 && jakiRodzaj(x - 1, y) == 0
 					&& (jakiPotwor(x - 1, y) == 0 || stworki.get(jakieId(x - 1, y)).getZycie() == 0)) {
 				x--;
 			} else if (x == 0 && nr_planszyX > 0) {
@@ -318,7 +346,7 @@ public class PlanszaController {
 		}
 
 		if (event.getCode() == KeyCode.DOWN) {
-			if (x < ile_pol - 1 && jakiRodzaj(x + 1, y) < 100
+			if (x < ile_pol - 1 && jakiRodzaj(x + 1, y) == 0
 					&& (jakiPotwor(x + 1, y) == 0 || stworki.get(jakieId(x + 1, y)).getZycie() == 0)) {
 				x++;
 			} else if (x == ile_pol - 1 && nr_planszyX < ile_plansz - 1) {
@@ -333,7 +361,7 @@ public class PlanszaController {
 		}
 
 		if (event.getCode() == KeyCode.LEFT) {
-			if (y > 0 && jakiRodzaj(x, y - 1) < 100
+			if (y > 0 && jakiRodzaj(x, y - 1) == 0
 					&& (jakiPotwor(x, y - 1) == 0 || stworki.get(jakieId(x, y - 1)).getZycie() == 0)) {
 				y--;
 			} else if (y == 0 && nr_planszyY > 0) {
@@ -348,7 +376,7 @@ public class PlanszaController {
 		}
 
 		if (event.getCode() == KeyCode.RIGHT) {
-			if (y < ile_pol - 1 && jakiRodzaj(x, y + 1) < 100
+			if (y < ile_pol - 1 && jakiRodzaj(x, y + 1) == 0
 					&& (jakiPotwor(x, y + 1) == 0 || stworki.get(jakieId(x, y + 1)).getZycie() == 0)) {
 				y++;
 			} else if (y == ile_pol - 1 && nr_planszyY < ile_plansz - 1) {
