@@ -105,7 +105,7 @@ public class PlanszaController {
 	public void initialize() {
 		wiedzmin = new ImageView();
 		plansza = new ArrayList<Pole>();
-		iv_postac.setImage(new Image("/app/view/wiedzmak.png", 160, 180, true, false));
+		iv_postac.setImage(new Image("/img/wiedzmak.png", 160, 180, true, false));
 		lbl_imie.setText("WiedŸmak " + imie.toUpperCase());
 		pokaz_statystyki();
 		podloza_sql();
@@ -130,14 +130,14 @@ public class PlanszaController {
 		dane_z_sql();
 		// Wyœwietlanie danych na planszy
 		for (Pole i : plansza) {
-			Image pod = new Image("/app/view/" + podloza.get(i.getPodloze()).getPlik(), 60, 60, true, false);
+			Image pod = new Image("/img/" + podloza.get(i.getPodloze()).getPlik(), 60, 60, true, false);
 			ImageView iv_pod = new ImageView(pod);
 			iv_pod.setRotate(podloza.get(i.getPodloze()).getRotacja());
 			gp.add(iv_pod, i.getY(), i.getX());
 
 			// Dodawanie przeszkód
 			if (i.getRodzaj() > 0) {
-				Image img = new Image("/app/view/" + przeszkody.get(i.getRodzaj()).getPlik(), 60, 60, true, false);
+				Image img = new Image("/img/" + przeszkody.get(i.getRodzaj()).getPlik(), 60, 60, true, false);
 				ImageView iv = new ImageView(img);
 				gp.add(iv, i.getY(), i.getX());
 			}
@@ -150,8 +150,8 @@ public class PlanszaController {
 						ps.setInt(1, i.getStwor());
 						rs = ps.executeQuery();
 						rs.next();
-						Image temp1 = new Image("/app/view/" + rs.getString("img_maly"), 60, 60, true, false);
-						Image temp2 = new Image("/app/view/" + rs.getString("img_duzy"), 500, 500, true, false);
+						Image temp1 = new Image("/img/" + rs.getString("img_maly"), 60, 60, true, false);
+						Image temp2 = new Image("/img/" + rs.getString("img_duzy"), 500, 500, true, false);
 						stworki.put(i.getId(),
 								new Stwor(rs.getString("nazwa"), temp1, temp2, rs.getInt("spryt"), rs.getInt("atak"),
 										rs.getInt("obrona"), rs.getString("bron"), rs.getInt("bronsila"),
@@ -269,7 +269,7 @@ public class PlanszaController {
 		if (!kierunek.equals("")) {
 			// Grafiki zaci¹gniête ze strony:
 			// http://www.reinerstilesets.de/2d-grafiken/
-			wiedzmin_img = new Image("/app/view/" + kierunek + ".png", 60, 60, true, false);
+			wiedzmin_img = new Image("/img/" + kierunek + ".png", 60, 60, true, false);
 			wiedzmin.setImage(wiedzmin_img);
 			gp.getChildren().remove(wiedzmin);
 			gp.add(wiedzmin, y, x);
