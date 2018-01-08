@@ -36,6 +36,8 @@ public class PlanszaController {
 	Image wiedzmin_img;
 	ImageView wiedzmin;
 	static String imie = StartView.imie;
+	static int poziom = 1;
+	static int dosw = 0;
 	static int spryt = 1;
 	static int atak = 2;
 	static int obrona = 2;
@@ -74,6 +76,12 @@ public class PlanszaController {
 
 	@FXML
 	private Label lbl_imie;
+	
+    @FXML
+    private Label lbl_Poziom;
+
+    @FXML
+    private Label lbl_Dosw;
 
 	@FXML
 	private Rectangle recZycie;
@@ -114,6 +122,8 @@ public class PlanszaController {
 	}
 
 	public void pokaz_statystyki() {
+		lbl_Poziom.setText("poziom : " + poziom);
+		lbl_Dosw.setText("doœwiadczenie: " + dosw);
 		lbl_Atak.setText("ATAK: " + atak);
 		lbl_Obrona.setText("OBRONA: " + obrona);
 		lbl_Spryt.setText("SPRYT: " + spryt);

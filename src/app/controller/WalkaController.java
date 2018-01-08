@@ -117,6 +117,7 @@ public class WalkaController {
 	String bron2;
 	int bronSila2;
 	int zycie2;
+	int zycie2nastarcie;
 	Image img_potwor;
 
 	int specjalny1 = 0;
@@ -142,6 +143,7 @@ public class WalkaController {
 		bron2 = PlanszaController.stworki.get(PlanszaController.potworek).getBron();
 		bronSila2 = PlanszaController.stworki.get(PlanszaController.potworek).getBronSila();
 		zycie2 = PlanszaController.stworki.get(PlanszaController.potworek).getZycie();
+		zycie2nastarcie = zycie2;
 		img_potwor = PlanszaController.stworki.get(PlanszaController.potworek).getImg_duzy();
 		imgZawodnik2.setImage(img_potwor);
 
@@ -384,7 +386,7 @@ public class WalkaController {
 			x_stop = 50.0;
 		}
 
-		Image img = new Image("/app/view/" + temp, 100, 100, true, false);
+		Image img = new Image("/img/" + temp, 100, 100, true, false);
 		ivAnimacja.setImage(img);
 
 		FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), ivAnimacja);
@@ -432,9 +434,10 @@ public class WalkaController {
 		System.out.println("koniecWalki");
 		if (czyZyje) {
 			PlanszaController.stworki.get(PlanszaController.potworek).setZycie(0);
-			Image kill = new Image("/app/view/kill.png", 60, 60, true, false);
+			Image kill = new Image("/img/kill.png", 60, 60, true, false);
 			PlanszaController.stworki.get(PlanszaController.potworek).setImg_maly(kill);
 			PlanszaController.zycie = zycie1;
+			PlanszaController.dosw+=zycie2nastarcie+spryt2+atak2+obrona2+bronSila2;
 			show("Wygrana", "Zwyciêstwo!");
 		} else {
 			show("GameOver", "GAME OVER");
@@ -450,7 +453,7 @@ public class WalkaController {
 		try {
 			rodzic = (Parent) FXMLLoader.load(getClass().getResource("/app/view/" + plik + ".fxml"));
 		} catch (IOException e) {
-			System.out.println("B³¹d przy odpalaniu widoku!");
+			System.out.println("B³¹d przy odpalaniu widoku " + plik);
 		}
 		Scene scenka = new Scene(rodzic);
 		stejdz.setScene(scenka);
