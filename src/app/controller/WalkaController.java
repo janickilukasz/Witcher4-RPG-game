@@ -111,13 +111,13 @@ public class WalkaController {
 	int zycie1;
 
 	String nazwa;
-	int spryt2;
-	int atak2;
-	int obrona2;
+	static int spryt2;
+	static int atak2;
+	static int obrona2;
 	String bron2;
-	int bronSila2;
+	static int bronSila2;
 	int zycie2;
-	int zycie2nastarcie;
+	static int zycie2nastarcie;
 	Image img_potwor;
 
 	int specjalny1 = 0;
@@ -437,7 +437,7 @@ public class WalkaController {
 			Image kill = new Image("/img/kill.png", 60, 60, true, false);
 			PlanszaController.stworki.get(PlanszaController.potworek).setImg_maly(kill);
 			PlanszaController.zycie = zycie1;
-			PlanszaController.dosw+=zycie2nastarcie+spryt2+atak2+obrona2+bronSila2;
+			PlanszaController.dosw+=ileDosw(zycie2nastarcie,spryt2,atak2,obrona2,bronSila2);
 			show("Wygrana", "Zwyciêstwo!");
 		} else {
 			show("GameOver", "GAME OVER");
@@ -446,6 +446,17 @@ public class WalkaController {
 		ap.getScene().getWindow().hide();
 	}
 
+	//Wspó³czynniki do sterowania zwracan¹ iloœci¹ doœwiadczenia po walce
+	static int zycieMulti = 1;
+	static int sprytMulti = 5;
+	static int atakMulti = 10;
+	static int obronaMulti = 9;
+	static int bronMulti = 2;
+	
+	static int ileDosw(int zycie, int spryt, int atak, int obrona, int bron){
+		return zycie*zycieMulti + spryt*sprytMulti + atak*atakMulti + obrona*obronaMulti + bron*bronMulti;
+	}
+	
 	private void show(String plik, String tytul) {
 		System.out.println("show");
 		Stage stejdz = new Stage();
