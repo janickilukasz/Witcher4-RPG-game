@@ -7,22 +7,39 @@ create database wiedzmak DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general
 use wiedzmak;
 
 create table pola(id smallint primary key auto_increment, planszax tinyint, planszay tinyint, x tinyint, y tinyint, podloze smallint, rodzaj smallint, stwor tinyint);
-INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,1,0,1,104,0),(0,0,1,1,1,102,0),(0,0,1,2,1,101,0),(0,0,1,3,1,102,0),(0,0,1,4,1,101,0),(0,0,1,5,1,104,0),(0,0,1,6,1,102,0),(0,0,1,7,1,101,0),(0,0,1,8,1,102,0),(0,0,1,9,1,100,0);
-INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,2,0,1,103,0),(0,0,2,1,1,103,0),(0,0,2,2,1,100,0),(0,0,2,3,1,101,0),(0,0,2,4,1,106,0),(0,0,2,5,1,107,0),(0,0,2,6,1,103,0),(0,0,2,7,1,101,0),(0,0,2,8,1,102,0),(0,0,2,9,1,0,0);
-INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,3,0,1,102,0),(0,0,3,1,1,101,0),(0,0,3,2,1,104,0),(0,0,3,3,1,0,0),(0,0,3,4,1,0,0),(0,0,3,5,1,0,0),(0,0,3,6,1,103,0),(0,0,3,7,1,104,0),(0,0,3,8,1,0,0),(0,0,3,9,1,0,0);
-INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,4,0,2,103,0),(0,0,4,1,1,102,0),(0,0,4,2,1,0,0),(0,0,4,3,1,0,0),(0,0,4,4,1,0,0),(0,0,4,5,1,0,0),(0,0,4,6,1,0,1),(0,0,4,7,1,103,0),(0,0,4,8,1,0,0),(0,0,4,9,1,0,0);
-INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,5,0,1,101,0),(0,0,5,1,1,100,0),(0,0,5,2,1,0,0),(0,0,5,3,1,0,0),(0,0,5,4,1,105,0),(0,0,5,5,1,0,0),(0,0,5,6,1,0,0),(0,0,5,7,1,0,0),(0,0,5,8,1,0,0),(0,0,5,9,1,0,0);
-INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,6,0,1,100,0),(0,0,6,1,2,100,0),(0,0,6,2,2,102,0),(0,0,6,3,1,0,0),(0,0,6,4,1,0,0),(0,0,6,5,1,0,0),(0,0,6,6,1,0,0),(0,0,6,7,1,0,0),(0,0,6,8,1,0,0),(0,0,6,9,1,0,0);
-INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,7,0,1,100,0),(0,0,7,1,2,100,0),(0,0,7,2,2,0,1),(0,0,7,3,3,0,0),(0,0,7,4,2,0,0),(0,0,7,5,1,0,0),(0,0,7,6,1,0,0),(0,0,7,7,1,0,0),(0,0,7,8,1,0,0),(0,0,7,9,1,0,0);
-INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,8,0,1,101,0),(0,0,8,1,1,101,0),(0,0,8,2,1,104,0),(0,0,8,3,1,0,0),(0,0,8,4,1,0,1),(0,0,8,5,1,103,0),(0,0,8,6,1,102,0),(0,0,8,7,1,0,0),(0,0,8,8,1,0,0),(0,0,8,9,1,0,0);
-INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,9,0,1,101,0),(0,0,9,1,1,103,0),(0,0,9,2,1,0,0),(0,0,9,3,1,0,0),(0,0,9,4,1,0,0),(0,0,9,5,1,0,0),(0,0,9,6,1,0,0),(0,0,9,7,1,0,0),(0,0,9,8,1,0,0),(0,0,9,9,1,0,0);
-INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,10,0,1,103,0),(0,0,10,1,1,0,0),(0,0,10,2,1,0,0),(0,0,10,3,1,0,0),(0,0,10,4,1,0,0),(0,0,10,5,1,0,0),(0,0,10,6,1,0,0),(0,0,10,7,1,0,0),(0,0,10,8,1,0,0),(0,0,10,9,1,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,0,0,1,104,0),(0,0,0,1,1,102,0),(0,0,0,2,1,101,0),(0,0,0,3,1,102,0),(0,0,0,4,1,101,0),(0,0,0,5,1,104,0),(0,0,0,6,1,102,0),(0,0,0,7,1,101,0),(0,0,0,8,1,102,0),(0,0,0,9,1,100,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,1,0,1,103,0),(0,0,1,1,1,103,0),(0,0,1,2,1,100,0),(0,0,1,3,1,101,0),(0,0,1,4,1,106,0),(0,0,1,5,1,107,0),(0,0,1,6,1,103,0),(0,0,1,7,1,101,0),(0,0,1,8,1,102,0),(0,0,1,9,1,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,2,0,1,102,0),(0,0,2,1,1,101,0),(0,0,2,2,1,104,0),(0,0,2,3,1,0,0),(0,0,2,4,1,0,0),(0,0,2,5,1,0,0),(0,0,2,6,1,103,0),(0,0,2,7,1,104,0),(0,0,2,8,1,0,0),(0,0,2,9,1,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,3,0,1,103,0),(0,0,3,1,1,102,0),(0,0,3,2,1,0,0),(0,0,3,3,1,0,0),(0,0,3,4,1,0,0),(0,0,3,5,1,0,0),(0,0,3,6,1,0,1),(0,0,3,7,1,103,0),(0,0,3,8,1,0,0),(0,0,3,9,1,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,4,0,1,101,0),(0,0,4,1,1,100,0),(0,0,4,2,1,0,0),(0,0,4,3,1,0,0),(0,0,4,4,1,105,0),(0,0,4,5,1,0,0),(0,0,4,6,1,0,0),(0,0,4,7,1,0,0),(0,0,4,8,1,0,0),(0,0,4,9,1,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,5,0,1,100,0),(0,0,5,1,1,100,0),(0,0,5,2,1,102,0),(0,0,5,3,1,0,0),(0,0,5,4,1,0,0),(0,0,5,5,1,0,0),(0,0,5,6,1,0,0),(0,0,5,7,1,0,0),(0,0,5,8,1,0,0),(0,0,5,9,1,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,6,0,1,100,0),(0,0,6,1,1,100,0),(0,0,6,2,1,0,1),(0,0,6,3,1,0,0),(0,0,6,4,1,0,0),(0,0,6,5,1,0,0),(0,0,6,6,1,0,0),(0,0,6,7,1,0,0),(0,0,6,8,1,0,0),(0,0,6,9,1,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,7,0,1,101,0),(0,0,7,1,1,101,0),(0,0,7,2,1,104,0),(0,0,7,3,1,0,0),(0,0,7,4,1,0,1),(0,0,7,5,1,103,0),(0,0,7,6,1,102,0),(0,0,7,7,1,0,0),(0,0,7,8,1,0,0),(0,0,7,9,1,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,8,0,1,101,0),(0,0,8,1,1,103,0),(0,0,8,2,1,0,0),(0,0,8,3,1,0,0),(0,0,8,4,1,0,0),(0,0,8,5,1,0,0),(0,0,8,6,1,0,0),(0,0,8,7,1,0,0),(0,0,8,8,1,0,0),(0,0,8,9,1,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,0,9,0,1,103,0),(0,0,9,1,1,0,0),(0,0,9,2,1,0,0),(0,0,9,3,1,0,0),(0,0,9,4,1,0,0),(0,0,9,5,1,0,0),(0,0,9,6,1,0,0),(0,0,9,7,1,0,0),(0,0,9,8,1,0,0),(0,0,9,9,1,0,0);
 
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,0,0,1,102,0),(0,1,0,1,1,102,0),(0,1,0,2,1,101,0),(0,1,0,3,1,100,0),(0,1,0,4,1,103,0),(0,1,0,5,1,101,0),(0,1,0,6,1,102,0),(0,1,0,7,1,102,0),(0,1,0,8,1,102,0),(0,1,0,9,1,101,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,1,0,1,0,0),(0,1,1,1,1,101,0),(0,1,1,2,1,100,0),(0,1,1,3,1,104,0),(0,1,1,4,1,0,0),(0,1,1,5,1,0,0),(0,1,1,6,1,0,0),(0,1,1,7,1,0,0),(0,1,1,8,1,0,0),(0,1,1,9,1,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,2,0,1,0,0),(0,1,2,1,1,0,0),(0,1,2,2,1,0,0),(0,1,2,3,1,102,0),(0,1,2,4,1,102,0),(0,1,2,5,1,0,0),(0,1,2,6,1,0,0),(0,1,2,7,1,0,0),(0,1,2,8,1,101,0),(0,1,2,9,1,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,3,0,1,0,0),(0,1,3,1,1,0,0),(0,1,3,2,1,0,0),(0,1,3,3,1,101,0),(0,1,3,4,1,0,0),(0,1,3,5,1,0,0),(0,1,3,6,1,0,0),(0,1,3,7,1,0,0),(0,1,3,8,1,0,0),(0,1,3,9,1,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,4,0,1,0,0),(0,1,4,1,1,0,0),(0,1,4,2,1,0,0),(0,1,4,3,1,0,0),(0,1,4,4,1,0,0),(0,1,4,5,1,0,0),(0,1,4,6,1,0,0),(0,1,4,7,1,0,0),(0,1,4,8,1,101,0),(0,1,4,9,1,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,5,0,1,0,0),(0,1,5,1,1,0,0),(0,1,5,2,1,0,0),(0,1,5,3,7,0,0),(0,1,5,4,4,0,0),(0,1,5,5,4,103,0),(0,1,5,6,4,0,0),(0,1,5,7,4,0,0),(0,1,5,8,4,0,0),(0,1,5,9,4,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,6,0,1,0,0),(0,1,6,1,1,0,0),(0,1,6,2,1,0,0),(0,1,6,3,3,0,0),(0,1,6,4,2,101,0),(0,1,6,5,2,102,0),(0,1,6,6,2,104,0),(0,1,6,7,2,0,0),(0,1,6,8,2,0,0),(0,1,6,9,2,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,7,0,1,0,0),(0,1,7,1,1,0,0),(0,1,7,2,1,0,0),(0,1,7,3,3,0,0),(0,1,7,4,2,0,0),(0,1,7,5,2,102,0),(0,1,7,6,2,0,0),(0,1,7,7,2,0,0),(0,1,7,8,2,0,0),(0,1,7,9,2,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,8,0,1,0,0),(0,1,8,1,1,103,0),(0,1,8,2,1,0,0),(0,1,8,3,3,0,0),(0,1,8,4,2,0,0),(0,1,8,5,2,0,0),(0,1,8,6,2,0,0),(0,1,8,7,2,0,0),(0,1,8,8,2,0,0),(0,1,8,9,2,0,0);
+INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,9,0,1,0,0),(0,1,9,1,1,0,0),(0,1,9,2,1,0,0),(0,1,9,3,3,0,0),(0,1,9,4,2,0,0),(0,1,9,5,2,0,0),(0,1,9,6,2,0,0),(0,1,9,7,2,0,0),(0,1,9,8,2,0,0),(0,1,9,9,2,0,0);
 
 create table podloza(id smallint primary key auto_increment, nazwa varchar(30), img varchar(30), rotacja smallint);
 INSERT INTO podloza VALUES (1, 'trawa', 'trawa.jpg', 0);
 INSERT INTO podloza VALUES (2, 'piasek', 'piasek.jpg', 0);
-INSERT INTO podloza VALUES (3, 'piasek', 'piasek.jpg', 90);
+INSERT INTO podloza VALUES (3, 'trawa-piasek', 'trawa_piasek.jpg', 0);
+INSERT INTO podloza VALUES (4, 'trawa-piasek', 'trawa_piasek.jpg', 90);
+INSERT INTO podloza VALUES (5, 'trawa-piasek', 'trawa_piasek.jpg', 180);
+INSERT INTO podloza VALUES (6, 'trawa-piasek', 'trawa_piasek.jpg', 270);
+INSERT INTO podloza VALUES (7, 'trawa-piasek-kat', 'trawa_piasek_kat.jpg', 0);
+INSERT INTO podloza VALUES (8, 'trawa-piasek-kat', 'trawa_piasek_kat.jpg', 90);
+INSERT INTO podloza VALUES (9, 'trawa-piasek-kat', 'trawa_piasek_kat.jpg', 180);
+INSERT INTO podloza VALUES (10, 'trawa-piasek-kat', 'trawa_piasek_kat.jpg', 270);
 
 create table przeszkody(id smallint primary key, nazwa varchar(30), img varchar(30));
 INSERT INTO przeszkody VALUES (100, 'drzewo1','tree1.png');
