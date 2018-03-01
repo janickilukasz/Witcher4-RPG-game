@@ -10,7 +10,8 @@ import javafx.scene.Scene;
 public class Main extends Application {
 	@Override
 	public void start(Stage stg) throws Exception {
-		Parent rodzic = (Parent) FXMLLoader.load(getClass().getResource("/app/view/StartView.fxml"));
+		//Parent rodzic = (Parent) FXMLLoader.load(getClass().getResource("/app/view/StartView.fxml"));
+		Parent rodzic = (Parent) FXMLLoader.load(getClass().getResource("/app/view/Edytor.fxml"));
 		Scene sc = new Scene(rodzic);
 		stg.setScene(sc);
 		stg.setTitle("WITCHER 4 : Dzika Zgon");

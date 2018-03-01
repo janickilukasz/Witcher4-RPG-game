@@ -11,6 +11,11 @@ public class Podloze {
 		this.nazwa = nazwa;
 		this.plik = plik;
 		this.rotacja = rotacja;
+	}	
+
+	public Podloze(String nazwa, String plik) {
+		this.nazwa = nazwa;
+		this.plik = plik;
 	}
 
 	public int getId() {
