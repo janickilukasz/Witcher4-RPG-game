@@ -13,6 +13,7 @@ public class Main extends Application {
 		//Parent rodzic = (Parent) FXMLLoader.load(getClass().getResource("/app/view/StartView.fxml"));
 		Parent rodzic = (Parent) FXMLLoader.load(getClass().getResource("/app/view/Edytor.fxml"));
 		Scene sc = new Scene(rodzic);
+		sc.getStylesheets().add("/other/styles.css");
 		stg.setScene(sc);
 		stg.setTitle("WITCHER 4 : Dzika Zgon");
 		stg.show();
