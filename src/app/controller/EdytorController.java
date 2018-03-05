@@ -1,15 +1,19 @@
 package app.controller;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
+import app.database.DBConnector;
+import app.model.Field;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -30,27 +34,38 @@ public class EdytorController {
 	@FXML
 	private GridPane gpElements;
 
+	PreparedStatement ps;
+	Connection conn;
+	DBConnector db;
+	ResultSet rs;
+
+	ArrayList<Field> fieldsAll;
+
 	public void initialize() {
-	
-		
-//		Image test = new Image("img/land_trawa.jpg", 60, 60, true, false);
-//		ImageView iv;
-//		for (int i = 1; i < 11; i++) {
-//			for (int j = 1; j < 11; j++) {
-//				iv = new ImageView(test);
-//				gpMain.add(iv, i, j);
-//				iv.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-//					System.out.println("Row:" + GridPane.getRowIndex((Node) e.getSource()) + ", Column:"
-//							+ GridPane.getColumnIndex((Node) e.getSource()));
-//				});
-//			}
-//		}
+
+		// TUTAJ TRZEBA POBRAÆ DANE Z BAZY DANYCH I WSTAWIÆ JE DO fieldsAll. A
+		// potem napisaæ metodê, która wyœwietli zawartoœæ fieldsAll.
+
+		// Image test = new Image("img/land_trawa.jpg", 60, 60, true, false);
+		// ImageView iv;
+		// for (int i = 1; i < 11; i++) {
+		// for (int j = 1; j < 11; j++) {
+		// iv = new ImageView(test);
+		// gpMain.add(iv, i, j);
+		// iv.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+		// System.out.println("Row:" + GridPane.getRowIndex((Node)
+		// e.getSource()) + ", Column:"
+		// + GridPane.getColumnIndex((Node) e.getSource()));
+		// });
+		// }
+		// }
 
 		bordersOfGp(gpElements, 4, 7);
 
 	}
 
-	//dobrze by³oby tutaj automatycznie sprawdzaæ rows i columns ale na razie nie wiem jak
+	// dobrze by³oby tutaj automatycznie sprawdzaæ rows i columns ale na razie
+	// nie wiem jak
 	private void bordersOfGp(GridPane gp, int rows, int columns) {
 
 		for (int i = 0; i < columns; i++) {
@@ -65,8 +80,23 @@ public class EdytorController {
 			}
 		}
 	}
-	
+
+	// uproszczenie:
+	private void fill2(String typeOfFill) {
+		gpElements.getChildren().clear();
+		bordersOfGp(gpElements, 4, 7);
+		Image img = new Image("/img/creat_kura.png", 59, 59, true, false);
+		for (Node n : gpElements.getChildren()) {
+			if (n instanceof Pane) {
+				ImageView iv = new ImageView(img);
+				((Pane) n).getChildren().add(iv);
+			}
+
+		}
+	}
+
 	private void fill(String typeOfFill) {
+
 		gpElements.getChildren().clear();
 		bordersOfGp(gpElements, 4, 7);
 		final File folder = new File("./src/img/");
@@ -96,40 +126,40 @@ public class EdytorController {
 				}
 			}
 		}
-		
+
 	}
-	
-	private void deselectImg(){
-		for(Node n:gpElements.getChildren()){
-			if(n instanceof ImageView){
+
+	private void deselectImg() {
+		for (Node n : gpElements.getChildren()) {
+			if (n instanceof ImageView) {
 				n.setOpacity(1);
 			}
 		}
 	}
-	
-	private void lightUpThePane(Pane p){
-		for(Node n:p.getParent().getChildrenUnmodifiable()){
-			if(n instanceof Pane){
+
+	private void lightUpThePane(Pane p) {
+		for (Node n : p.getParent().getChildrenUnmodifiable()) {
+			if (n instanceof Pane) {
 				n.setStyle("-fx-background-color: transparent");
 			}
 		}
 		p.setStyle("-fx-background-color: orange");
 	}
-	
-	private Pane identifyPane(ImageView img){
+
+	private Pane identifyPane(ImageView img) {
 		int r = GridPane.getRowIndex(img);
 		int c = GridPane.getColumnIndex(img);
-		for(Node n:img.getParent().getChildrenUnmodifiable()){
-			if(n instanceof Pane && GridPane.getColumnIndex(n)==c && GridPane.getRowIndex(n)==r){
+		for (Node n : img.getParent().getChildrenUnmodifiable()) {
+			if (n instanceof Pane && GridPane.getColumnIndex(n) == c && GridPane.getRowIndex(n) == r) {
 				return (Pane) n;
 			}
 		}
 		return null;
 	}
-	
+
 	@FXML
 	void clickActionCreatures(MouseEvent event) {
-		fill("creat");
+		fill2("creat");
 	}
 
 	@FXML
@@ -139,7 +169,7 @@ public class EdytorController {
 
 	@FXML
 	void clickActionObstacles(MouseEvent event) {
-		fill("obst");
+		fill2("obst");
 	}
 
 }

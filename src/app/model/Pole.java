@@ -2,8 +2,6 @@ package app.model;
 
 public class Pole {
 	private int id;
-
-
 	private static int nr_planszy;
 	private int x;
 	private int y;
@@ -75,6 +73,4 @@ public class Pole {
 	public void setStwor(int stwor) {
 		this.stwor = stwor;
 	}
-	
-	
 }

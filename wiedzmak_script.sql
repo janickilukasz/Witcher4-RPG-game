@@ -1,5 +1,5 @@
 drop table if exists wiedzmak.pola;
-drop table if exists wiedzmak.podloza;
+drop table if exists wiedzmak.lands;
 drop table if exists wiedzmak.stwory;
 drop database if exists wiedzmak;
 
@@ -29,17 +29,11 @@ INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,
 INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,8,0,1,0,0),(0,1,8,1,1,103,0),(0,1,8,2,1,0,0),(0,1,8,3,3,0,0),(0,1,8,4,2,0,0),(0,1,8,5,2,0,0),(0,1,8,6,2,0,0),(0,1,8,7,2,0,0),(0,1,8,8,2,0,0),(0,1,8,9,2,0,0);
 INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,9,0,1,0,0),(0,1,9,1,1,0,0),(0,1,9,2,1,0,0),(0,1,9,3,3,0,0),(0,1,9,4,2,0,0),(0,1,9,5,2,0,0),(0,1,9,6,2,0,0),(0,1,9,7,2,0,0),(0,1,9,8,2,0,0),(0,1,9,9,2,0,0);
 
-create table podloza(id smallint primary key auto_increment, nazwa varchar(30), img varchar(30), rotacja smallint);
-INSERT INTO podloza VALUES (1, 'trawa', 'trawa.jpg', 0);
-INSERT INTO podloza VALUES (2, 'piasek', 'piasek.jpg', 0);
-INSERT INTO podloza VALUES (3, 'trawa-piasek', 'trawa_piasek.jpg', 0);
-INSERT INTO podloza VALUES (4, 'trawa-piasek', 'trawa_piasek.jpg', 90);
-INSERT INTO podloza VALUES (5, 'trawa-piasek', 'trawa_piasek.jpg', 180);
-INSERT INTO podloza VALUES (6, 'trawa-piasek', 'trawa_piasek.jpg', 270);
-INSERT INTO podloza VALUES (7, 'trawa-piasek-kat', 'trawa_piasek_kat.jpg', 0);
-INSERT INTO podloza VALUES (8, 'trawa-piasek-kat', 'trawa_piasek_kat.jpg', 90);
-INSERT INTO podloza VALUES (9, 'trawa-piasek-kat', 'trawa_piasek_kat.jpg', 180);
-INSERT INTO podloza VALUES (10, 'trawa-piasek-kat', 'trawa_piasek_kat.jpg', 270);
+create table lands(id smallint primary key auto_increment, justname varchar(30), filename varchar(30));
+INSERT INTO lands VALUES (1, 'trawa', 'trawa.jpg');
+INSERT INTO lands VALUES (2, 'piasek', 'piasek.jpg');
+INSERT INTO lands VALUES (3, 'trawa-piasek', 'trawa_piasek.jpg');
+INSERT INTO lands VALUES (4, 'trawa-piasek-kat', 'trawa_piasek_kat.jpg');
 
 create table przeszkody(id smallint primary key, nazwa varchar(30), img varchar(30));
 INSERT INTO przeszkody VALUES (100, 'drzewo1','tree1.png');
