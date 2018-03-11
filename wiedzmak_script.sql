@@ -35,19 +35,19 @@ INSERT INTO lands VALUES (2, 'piasek', 'piasek.jpg');
 INSERT INTO lands VALUES (3, 'trawa-piasek', 'trawa_piasek.jpg');
 INSERT INTO lands VALUES (4, 'trawa-piasek-kat', 'trawa_piasek_kat.jpg');
 
-create table przeszkody(id smallint primary key, nazwa varchar(30), img varchar(30));
-INSERT INTO przeszkody VALUES (100, 'drzewo1','tree1.png');
-INSERT INTO przeszkody VALUES (101, 'drzewo2','tree2.png');
-INSERT INTO przeszkody VALUES (102, 'drzewo3','tree3.png');
-INSERT INTO przeszkody VALUES (103, 'drzewo4','tree4.png');
-INSERT INTO przeszkody VALUES (104, 'drzewo5','tree5.png');
-INSERT INTO przeszkody VALUES (105, 'ognisko', 'ognisko.png');
-INSERT INTO przeszkody VALUES (106, 'namiot lewa str', 'namiot_lewo.png');
-INSERT INTO przeszkody VALUES (107, 'namiot prawa str', 'namiot_prawo.png');
-INSERT INTO przeszkody VALUES (108, 'skała1','rock1.png');
-INSERT INTO przeszkody VALUES (109, 'jezioro_lewo','jezioro1.png');
-INSERT INTO przeszkody VALUES (110, 'jezioro_srodek','jezioro2.png');
-INSERT INTO przeszkody VALUES (111, 'jezioro_prawo','jezioro3.png');
+create table obstacles(id smallint primary key, justname varchar(30), filename varchar(30));
+INSERT INTO obstacles VALUES (100, 'drzewo1','tree1.png');
+INSERT INTO obstacles VALUES (101, 'drzewo2','tree2.png');
+INSERT INTO obstacles VALUES (102, 'drzewo3','tree3.png');
+INSERT INTO obstacles VALUES (103, 'drzewo4','tree4.png');
+INSERT INTO obstacles VALUES (104, 'drzewo5','tree5.png');
+INSERT INTO obstacles VALUES (105, 'ognisko', 'ognisko.png');
+INSERT INTO obstacles VALUES (106, 'namiot lewa str', 'namiot_lewo.png');
+INSERT INTO obstacles VALUES (107, 'namiot prawa str', 'namiot_prawo.png');
+INSERT INTO obstacles VALUES (108, 'skała1','rock1.png');
+INSERT INTO obstacles VALUES (109, 'jezioro_lewo','jezioro1.png');
+INSERT INTO obstacles VALUES (110, 'jezioro_srodek','jezioro2.png');
+INSERT INTO obstacles VALUES (111, 'jezioro_prawo','jezioro3.png');
 
 create table stwory(id smallint primary key, nazwa varchar(30), img_maly varchar(30), img_duzy varchar(30), spryt tinyint, atak tinyint, obrona tinyint, bron varchar(40), bronsila tinyint, zycie smallint);
 #MAX ŻYCIE TO 210 PKT!!!!!

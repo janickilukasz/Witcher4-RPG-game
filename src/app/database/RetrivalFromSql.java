@@ -4,12 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
+import app.model.Creature;
+import app.model.Element;
 import app.model.Land;
-import app.model.Podloze;
-import app.model.Pole;
-import app.model.Przeszkoda;
+import app.model.Obstacle;
 
 public class RetrivalFromSql {
 
@@ -21,20 +22,59 @@ public class RetrivalFromSql {
 		conn = db.connInit();
 	}
 
-	private static HashMap<Integer, Land> landRetrieve() {
+	public static ArrayList<Element> landRetrieve() {
 		connect();
 		PreparedStatement ps;
 		ResultSet rs;
-		HashMap<Integer, Land> hm = new HashMap<Integer, Land>();
+		List<Element> li = new ArrayList<Element>();
 		try {
 			ps = conn.prepareStatement("SELECT * FROM lands");
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				hm.put(rs.getInt("id"), new Land(rs.getInt("id"), rs.getString("justname"), rs.getString("filename")));
+				li.add(new Land(rs.getInt("id"), rs.getString("justname"), rs.getString("filename")));
 			}
-			return hm;
+			return (ArrayList<Element>) li;
 		} catch (SQLException e) {
 			System.out.println("Error while retrieving lands!");
+			return null;
+		}
+
+	}
+	
+	public static ArrayList<Element> obstacleRetrieve() {
+		connect();
+		PreparedStatement ps;
+		ResultSet rs;
+		List<Element> li = new ArrayList<Element>();
+		try {
+			ps = conn.prepareStatement("SELECT * FROM obstacles");
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				li.add(new Obstacle(rs.getInt("id"), rs.getString("justname"), rs.getString("filename")));
+			}
+			return (ArrayList<Element>) li;
+		} catch (SQLException e) {
+			System.out.println("Error while retrieving obstacles!");
+			return null;
+		}
+
+	}
+	
+	public static ArrayList<Element> creatureRetrieve() {
+		connect();
+		PreparedStatement ps;
+		ResultSet rs;
+		List<Element> li = new ArrayList<Element>();
+		try {
+			ps = conn.prepareStatement("SELECT * FROM creatures");
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				li.add(new Creature(rs.getInt("id"), rs.getString("justname"), rs.getString("filename"), rs.getString("fileNameBig"), rs.getInt("smart"), rs.getInt("offence"), rs.getInt("defence"),
+						rs.getString("weapon"), rs.getInt("weaponPower"), rs.getInt("life")));
+			}
+			return (ArrayList<Element>) li;
+		} catch (SQLException e) {
+			System.out.println("Error while retrieving creatures!");
 			return null;
 		}
 

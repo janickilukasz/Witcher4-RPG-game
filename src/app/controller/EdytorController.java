@@ -5,9 +5,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 import app.database.DBConnector;
+import app.database.RetrivalFromSql;
+import app.model.Creature;
+import app.model.Element;
 import app.model.Field;
+import app.model.Land;
+import app.model.Obstacle;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -39,10 +43,17 @@ public class EdytorController {
 	DBConnector db;
 	ResultSet rs;
 
+	ArrayList<Element> lands;
+	ArrayList<Element> obstacles;
+	ArrayList<Element> creatures;
 	ArrayList<Field> fieldsAll;
 
 	public void initialize() {
 
+		lands = RetrivalFromSql.landRetrieve();
+		obstacles = RetrivalFromSql.obstacleRetrieve();
+		creatures = RetrivalFromSql.creatureRetrieve();
+		
 		// TUTAJ TRZEBA POBRAÆ DANE Z BAZY DANYCH I WSTAWIÆ JE DO fieldsAll. A
 		// potem napisaæ metodê, która wyœwietli zawartoœæ fieldsAll.
 
@@ -82,12 +93,14 @@ public class EdytorController {
 	}
 
 	// uproszczenie:
-	private void fill2(String typeOfFill) {
+	private void fill2(ArrayList<Element> el) {
 		gpElements.getChildren().clear();
 		bordersOfGp(gpElements, 4, 7);
-		Image img = new Image("/img/creat_kura.png", 59, 59, true, false);
+		Image img;
+		int i=0;
 		for (Node n : gpElements.getChildren()) {
 			if (n instanceof Pane) {
+				img = new Image("/img/" + el.get(i).getFileName(), 59, 59, true, false);
 				ImageView iv = new ImageView(img);
 				((Pane) n).getChildren().add(iv);
 			}
@@ -159,17 +172,17 @@ public class EdytorController {
 
 	@FXML
 	void clickActionCreatures(MouseEvent event) {
-		fill2("creat");
+		fill2(creatures);
 	}
 
 	@FXML
 	void clickActionLands(MouseEvent event) {
-		fill("land");
+		fill2(lands);
 	}
 
 	@FXML
 	void clickActionObstacles(MouseEvent event) {
-		fill2("obst");
+		fill2(obstacles);
 	}
 
 }
