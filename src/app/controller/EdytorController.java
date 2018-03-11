@@ -93,19 +93,31 @@ public class EdytorController {
 	}
 
 	// uproszczenie:
-	private void fill2(ArrayList<Element> el) {
+	private void fill2(ArrayList<Element> el, String fold) {
+//TUTAJ CIAGLE, PANE SCIAGNAY JEST PIONOWO
 		gpElements.getChildren().clear();
 		bordersOfGp(gpElements, 4, 7);
 		Image img;
 		int i=0;
+		int l = el.size();
+		System.out.println("L:" + l);
 		for (Node n : gpElements.getChildren()) {
 			if (n instanceof Pane) {
-				img = new Image("/img/" + el.get(i).getFileName(), 59, 59, true, false);
+				System.out.println(i);
+				System.out.println("/img/" + fold + "/" + el.get(i).getFileName());
+				//img = new Image("/img/atak_special.png");
+				img = new Image("/img/" + fold + "/" + el.get(i).getFileName(), 59, 59, true, false);
 				ImageView iv = new ImageView(img);
 				((Pane) n).getChildren().add(iv);
+				i++;
+				if(i>=l){
+					break;
+				}
 			}
+			System.out.println("node");
 
 		}
+		System.out.println("test");
 	}
 
 	private void fill(String typeOfFill) {
@@ -172,17 +184,17 @@ public class EdytorController {
 
 	@FXML
 	void clickActionCreatures(MouseEvent event) {
-		fill2(creatures);
+		fill2(creatures, "creatures");
 	}
 
 	@FXML
 	void clickActionLands(MouseEvent event) {
-		fill2(lands);
+		fill2(lands, "lands");
 	}
 
 	@FXML
 	void clickActionObstacles(MouseEvent event) {
-		fill2(obstacles);
+		fill2(obstacles, "obstacles");
 	}
 
 }

@@ -1,6 +1,7 @@
 drop table if exists wiedzmak.pola;
 drop table if exists wiedzmak.lands;
-drop table if exists wiedzmak.stwory;
+drop table if exists wiedzmak.obstacles;
+drop table if exists wiedzmak.creatures;
 drop database if exists wiedzmak;
 
 create database wiedzmak DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
@@ -30,28 +31,30 @@ INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,
 INSERT INTO pola(planszax, planszay, x , y, podloze, rodzaj, stwor) VALUES (0,1,9,0,1,0,0),(0,1,9,1,1,0,0),(0,1,9,2,1,0,0),(0,1,9,3,3,0,0),(0,1,9,4,2,0,0),(0,1,9,5,2,0,0),(0,1,9,6,2,0,0),(0,1,9,7,2,0,0),(0,1,9,8,2,0,0),(0,1,9,9,2,0,0);
 
 create table lands(id smallint primary key auto_increment, justname varchar(30), filename varchar(30));
-INSERT INTO lands VALUES (1, 'trawa', 'trawa.jpg');
-INSERT INTO lands VALUES (2, 'piasek', 'piasek.jpg');
-INSERT INTO lands VALUES (3, 'trawa-piasek', 'trawa_piasek.jpg');
-INSERT INTO lands VALUES (4, 'trawa-piasek-kat', 'trawa_piasek_kat.jpg');
+INSERT INTO lands VALUES (1, 'trawa', 'land_trawa.jpg');
+INSERT INTO lands VALUES (2, 'piasek', 'land_piasek.jpg');
+INSERT INTO lands VALUES (3, 'trawa-piasek', 'land_trawa_piasek.jpg');
+INSERT INTO lands VALUES (4, 'trawa-piasek-kat', 'land_trawa_piasek_kat.jpg');
 
 create table obstacles(id smallint primary key, justname varchar(30), filename varchar(30));
-INSERT INTO obstacles VALUES (100, 'drzewo1','tree1.png');
-INSERT INTO obstacles VALUES (101, 'drzewo2','tree2.png');
-INSERT INTO obstacles VALUES (102, 'drzewo3','tree3.png');
-INSERT INTO obstacles VALUES (103, 'drzewo4','tree4.png');
-INSERT INTO obstacles VALUES (104, 'drzewo5','tree5.png');
-INSERT INTO obstacles VALUES (105, 'ognisko', 'ognisko.png');
-INSERT INTO obstacles VALUES (106, 'namiot lewa str', 'namiot_lewo.png');
-INSERT INTO obstacles VALUES (107, 'namiot prawa str', 'namiot_prawo.png');
-INSERT INTO obstacles VALUES (108, 'skała1','rock1.png');
-INSERT INTO obstacles VALUES (109, 'jezioro_lewo','jezioro1.png');
-INSERT INTO obstacles VALUES (110, 'jezioro_srodek','jezioro2.png');
-INSERT INTO obstacles VALUES (111, 'jezioro_prawo','jezioro3.png');
+INSERT INTO obstacles VALUES (1, 'drzewo1','obst_tree1.png');
+INSERT INTO obstacles VALUES (2, 'drzewo2','obst_tree2.png');
+INSERT INTO obstacles VALUES (3, 'drzewo3','obst_tree3.png');
+INSERT INTO obstacles VALUES (4, 'drzewo4','obst_tree4.png');
+INSERT INTO obstacles VALUES (5, 'drzewo5','obst_tree5.png');
+INSERT INTO obstacles VALUES (6, 'drzewo4','obst_tree6.png');
+INSERT INTO obstacles VALUES (7, 'drzewo5','obst_tree7.png');
+INSERT INTO obstacles VALUES (8, 'ognisko', 'obst_ognisko.png');
+INSERT INTO obstacles VALUES (9, 'namiot lewa str', 'obst_namiot_lewo.png');
+INSERT INTO obstacles VALUES (10, 'namiot prawa str', 'obst_namiot_prawo.png');
+INSERT INTO obstacles VALUES (11, 'skała1','obst_rock1.png');
+INSERT INTO obstacles VALUES (12, 'jezioro_lewo','obst_jezioro1.png');
+INSERT INTO obstacles VALUES (13, 'jezioro_srodek','obst_jezioro2.png');
+INSERT INTO obstacles VALUES (14, 'jezioro_prawo','obst_jezioro3.png');
 
-create table stwory(id smallint primary key, nazwa varchar(30), img_maly varchar(30), img_duzy varchar(30), spryt tinyint, atak tinyint, obrona tinyint, bron varchar(40), bronsila tinyint, zycie smallint);
+create table creatures(id smallint primary key, justname varchar(30), filename varchar(30), filenameBig varchar(30), smart tinyint, offence tinyint, defence tinyint, weapon varchar(40), weaponPower tinyint, life smallint);
 #MAX ŻYCIE TO 210 PKT!!!!!
-INSERT INTO stwory VALUES(1, 'Kura','kura_mala.png','kura.png',1,0,1,'dziób',0,3);
-INSERT INTO stwory VALUES(2, 'Dzik','dzik_maly.png','dzik.png',1,2,1,'kły',1,10);
-INSERT INTO stwory VALUES(3, 'Szczur','szczurek_maly.png','szczurek.png',4,4,1,'zęby',1,8);
-INSERT INTO stwory VALUES(4, 'Pająk','spider_maly.png','spider.png',3,2,2,'odnóża',2,6);
+INSERT INTO creatures VALUES(1, 'Kura','creat_kura.png','kura.png',1,0,1,'dziób',0,3);
+INSERT INTO creatures VALUES(2, 'Dzik','creat_dzik.png','dzik.png',1,2,1,'kły',1,10);
+INSERT INTO creatures VALUES(3, 'Szczur','creat_szczurek.png','szczurek.png',4,4,1,'zęby',1,8);
+INSERT INTO creatures VALUES(4, 'Pająk','creat_spider.png','spider.png',3,2,2,'odnóża',2,6);
