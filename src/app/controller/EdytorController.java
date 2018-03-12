@@ -1,6 +1,5 @@
 package app.controller;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,22 +37,24 @@ public class EdytorController {
 	@FXML
 	private GridPane gpElements;
 
-	PreparedStatement ps;
-	Connection conn;
-	DBConnector db;
-	ResultSet rs;
+	static final int gpElemRows = 4;
+	static final int gpElemCols = 7;
+	static PreparedStatement ps;
+	static Connection conn;
+	static DBConnector db;
+	static ResultSet rs;
 
-	ArrayList<Element> lands;
-	ArrayList<Element> obstacles;
-	ArrayList<Element> creatures;
-	ArrayList<Field> fieldsAll;
+	static ArrayList<Element> lands;
+	static ArrayList<Element> obstacles;
+	static ArrayList<Element> creatures;
+	static ArrayList<Field> fieldsAll;
 
 	public void initialize() {
 
 		lands = RetrivalFromSql.landRetrieve();
 		obstacles = RetrivalFromSql.obstacleRetrieve();
 		creatures = RetrivalFromSql.creatureRetrieve();
-		
+
 		// TUTAJ TRZEBA POBRAÆ DANE Z BAZY DANYCH I WSTAWIÆ JE DO fieldsAll. A
 		// potem napisaæ metodê, która wyœwietli zawartoœæ fieldsAll.
 
@@ -71,7 +72,7 @@ public class EdytorController {
 		// }
 		// }
 
-		bordersOfGp(gpElements, 4, 7);
+		bordersOfGp(gpElements, gpElemRows, gpElemCols);
 
 	}
 
@@ -94,70 +95,26 @@ public class EdytorController {
 
 	// uproszczenie:
 	private void fill2(ArrayList<Element> el, String fold) {
-//TUTAJ CIAGLE, PANE SCIAGNAY JEST PIONOWO
 		gpElements.getChildren().clear();
-		bordersOfGp(gpElements, 4, 7);
+		bordersOfGp(gpElements, gpElemRows, gpElemCols);
 		Image img;
-		int i=0;
+		int i = 0;
+		int gpRow = 0;
+		int gpCol = 0;
 		int l = el.size();
-		System.out.println("L:" + l);
 		for (Node n : gpElements.getChildren()) {
 			if (n instanceof Pane) {
-				System.out.println(i);
-				System.out.println("/img/" + fold + "/" + el.get(i).getFileName());
-				//img = new Image("/img/atak_special.png");
-				img = new Image("/img/" + fold + "/" + el.get(i).getFileName(), 59, 59, true, false);
-				ImageView iv = new ImageView(img);
-				((Pane) n).getChildren().add(iv);
-				i++;
-				if(i>=l){
-					break;
+				i = gpRow * gpElemCols + gpCol;
+				if (i < l) {
+					img = new Image("/img/" + fold + "/" + el.get(i).getFileName(), 59, 59, true, false);
+					ImageView iv = new ImageView(img);
+					((Pane) n).getChildren().add(iv);
 				}
-			}
-			System.out.println("node");
-
-		}
-		System.out.println("test");
-	}
-
-	private void fill(String typeOfFill) {
-
-		gpElements.getChildren().clear();
-		bordersOfGp(gpElements, 4, 7);
-		final File folder = new File("./src/img/");
-		int columnGp = 0;
-		int rowGp = 0;
-
-		for (final File fileEntry : folder.listFiles()) {
-			String fileName = fileEntry.getName();
-			if (fileEntry.isFile() && fileName.matches(typeOfFill + ".*")) {
-				Image img = new Image("/img/" + fileName, 59, 59, true, false);
-				ImageView iv = new ImageView(img);
-				gpElements.add(iv, columnGp, rowGp);
-
-				iv.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-					System.out.println("IV Row:" + GridPane.getRowIndex((Node) e.getSource()) + ", Column:"
-							+ GridPane.getColumnIndex((Node) e.getSource()));
-					lightUpThePane(identifyPane(iv));
-					deselectImg();
-					iv.setOpacity(0.5);
-				});
-
-				if (columnGp < 6) {
-					columnGp++;
-				} else {
-					rowGp++;
-					columnGp = 0;
+				gpRow++;
+				if (gpRow >= gpElemRows) {
+					gpRow = 0;
+					gpCol++;
 				}
-			}
-		}
-
-	}
-
-	private void deselectImg() {
-		for (Node n : gpElements.getChildren()) {
-			if (n instanceof ImageView) {
-				n.setOpacity(1);
 			}
 		}
 	}
@@ -166,20 +123,11 @@ public class EdytorController {
 		for (Node n : p.getParent().getChildrenUnmodifiable()) {
 			if (n instanceof Pane) {
 				n.setStyle("-fx-background-color: transparent");
+				n.setOpacity(1);
 			}
 		}
 		p.setStyle("-fx-background-color: orange");
-	}
-
-	private Pane identifyPane(ImageView img) {
-		int r = GridPane.getRowIndex(img);
-		int c = GridPane.getColumnIndex(img);
-		for (Node n : img.getParent().getChildrenUnmodifiable()) {
-			if (n instanceof Pane && GridPane.getColumnIndex(n) == c && GridPane.getRowIndex(n) == r) {
-				return (Pane) n;
-			}
-		}
-		return null;
+		p.setOpacity(0.5);
 	}
 
 	@FXML
