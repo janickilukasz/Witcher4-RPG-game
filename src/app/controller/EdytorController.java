@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import app.database.DBConnector;
 import app.database.RetrivalFromSql;
@@ -50,7 +51,7 @@ public class EdytorController {
 	static ArrayList<Element> obstacles;
 	static ArrayList<Element> creatures;
 	static ArrayList<Field> fieldsAll;
-	
+
 	static HashMap<Pane, Element> GpElemHM;
 
 	static Pane gpElemPaneClicked;
@@ -60,6 +61,7 @@ public class EdytorController {
 		lands = RetrivalFromSql.landRetrieve();
 		obstacles = RetrivalFromSql.obstacleRetrieve();
 		creatures = RetrivalFromSql.creatureRetrieve();
+		GpElemHM = new HashMap<Pane, Element>();
 
 		bordersOfGp(gpElements, gpElemRows, gpElemCols);
 
@@ -84,6 +86,7 @@ public class EdytorController {
 
 	private void fill(ArrayList<Element> el, String fold) {
 		gpElements.getChildren().clear();
+		GpElemHM.clear();
 		bordersOfGp(gpElements, gpElemRows, gpElemCols);
 		Image img;
 		int i = 0;
@@ -97,7 +100,6 @@ public class EdytorController {
 					img = new Image("/img/" + fold + "/" + el.get(i).getFileName(), 59, 59, true, false);
 					ImageView iv = new ImageView(img);
 					((Pane) n).getChildren().add(iv);
-					//TUTAJ COŒ JEST DO POPRAWY
 					GpElemHM.put((Pane) n, el.get(i));
 				}
 				gpRow++;
@@ -137,6 +139,12 @@ public class EdytorController {
 	@FXML
 	void clickActionObstacles(MouseEvent event) {
 		fill(obstacles, "obstacles");
+		int i = 1;
+		for (Entry<Pane, Element> entry : GpElemHM.entrySet()) {
+			String nazwa = entry.getValue().getName();
+			System.out.println(i + ": " + nazwa);
+			i++;
+		}
 	}
 
 }
