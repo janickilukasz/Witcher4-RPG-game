@@ -42,6 +42,10 @@ public class EdytorController {
 
 	static final int gpElemRows = 4;
 	static final int gpElemCols = 7;
+	static final int gpMainRows = 12;
+	static final int gpMainCols = 12;
+	static int boardRow;
+	static int boardCol;
 	static PreparedStatement ps;
 	static Connection conn;
 	static DBConnector db;
@@ -53,6 +57,7 @@ public class EdytorController {
 	static ArrayList<Field> fieldsAll;
 
 	static HashMap<Pane, Element> GpElemHM;
+	static HashMap<Pane, Field> GpMainHM;
 
 	static Pane gpElemPaneClicked;
 
@@ -62,8 +67,13 @@ public class EdytorController {
 		obstacles = RetrivalFromSql.obstacleRetrieve();
 		creatures = RetrivalFromSql.creatureRetrieve();
 		GpElemHM = new HashMap<Pane, Element>();
+		GpMainHM = new HashMap<Pane, Field>();
+
+		boardRow = 0;
+		boardCol = 0;
 
 		bordersOfGp(gpElements, gpElemRows, gpElemCols);
+		bordersOfGp(gpMain, gpMainRows, gpMainCols);
 
 	}
 
@@ -74,18 +84,25 @@ public class EdytorController {
 		for (int i = 0; i < columns; i++) {
 			for (int j = 0; j < rows; j++) {
 				Pane pane = new Pane();
-				pane.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-					System.out.println("PANE Row:" + GridPane.getRowIndex((Node) pane) + ", Column:"
-							+ GridPane.getColumnIndex((Node) pane));
-					clickGpElemPane(pane);
-				});
+
+				if (gp == gpElements) {
+					pane.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+						clickGpElemPane(pane);
+					});
+				} else if (gp == gpMain) {
+					pane.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+						clickGpMainPane(pane);
+					});
+				}
 				gp.add(pane, i, j);
 			}
+
 		}
 	}
 
 	private void fill(ArrayList<Element> el, String fold) {
 		gpElements.getChildren().clear();
+		clickGpElemPane(null);
 		GpElemHM.clear();
 		bordersOfGp(gpElements, gpElemRows, gpElemCols);
 		Image img;
@@ -117,12 +134,45 @@ public class EdytorController {
 			gpElemPaneClicked.setStyle("-fx-background-color: transparent");
 			gpElemPaneClicked.setOpacity(1);
 		}
-		if (!newPane.getChildren().isEmpty()) {
+		if (newPane != null && !newPane.getChildren().isEmpty()) {
 			gpElemPaneClicked = newPane;
 			newPane.setStyle("-fx-background-color: orange");
 			newPane.setOpacity(0.5);
 		} else {
 			gpElemPaneClicked = null;
+		}
+	}
+
+	private void clickGpMainPane(Pane p) {
+		int row = GridPane.getRowIndex(p);
+		int col = GridPane.getColumnIndex(p);
+		if (row >= 1 && row < gpMainRows && col >= 1 && col < gpMainCols) {
+			Element e = GpElemHM.get(gpElemPaneClicked);
+//TUTAJ!!!! CZY TU NIE LEPIEJ ZMIENIÆ FIELD ZEBY ZAWIERA£O LAND, OBSTACLE itp zamiast LandFileName?
+			if (gpElemPaneClicked != null) {
+				if (GpMainHM.containsKey(p)) {
+					// podmianka
+				} else {
+					String filename = e.getFileName();
+					String landFilename = null;
+					String obstacleFilename = null;
+					String creatureFilename = null;
+					if (e instanceof Land) {
+						landFilename = filename;
+					} else if (e instanceof Obstacle) {
+						obstacleFilename = filename;
+					} else if (e instanceof Creature) {
+						creatureFilename = filename;
+					}
+					Field f = new Field(boardRow, boardCol, row, col, landFilename, 0, obstacleFilename,
+							creatureFilename);
+					GpMainHM.put(p, f);
+					Image img = new Image("/img/" + e.getClass().getSimpleName() + "s/" + e.getFileName(), 59, 59, true,
+							false);
+					ImageView iv = new ImageView(img);
+					p.getChildren().add(iv);
+				}
+			}
 		}
 	}
 
@@ -139,12 +189,12 @@ public class EdytorController {
 	@FXML
 	void clickActionObstacles(MouseEvent event) {
 		fill(obstacles, "obstacles");
-		int i = 1;
-		for (Entry<Pane, Element> entry : GpElemHM.entrySet()) {
-			String nazwa = entry.getValue().getName();
-			System.out.println(i + ": " + nazwa);
-			i++;
-		}
+		// int i = 1;
+		// for (Entry<Pane, Element> entry : GpElemHM.entrySet()) {
+		// String nazwa = entry.getValue().getName();
+		// System.out.println(i + ": " + nazwa);
+		// i++;
+		// }
 	}
 
 }
