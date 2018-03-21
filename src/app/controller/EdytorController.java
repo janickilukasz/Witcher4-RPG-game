@@ -90,7 +90,7 @@ public class EdytorController {
 						clickGpElemPane(pane);
 					});
 				} else if (gp == gpMain) {
-					pane.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+					pane.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
 						clickGpMainPane(pane);
 					});
 				}
@@ -148,31 +148,91 @@ public class EdytorController {
 		int col = GridPane.getColumnIndex(p);
 		if (row >= 1 && row < gpMainRows && col >= 1 && col < gpMainCols) {
 			Element e = GpElemHM.get(gpElemPaneClicked);
-//TUTAJ!!!! CZY TU NIE LEPIEJ ZMIENIÆ FIELD ZEBY ZAWIERA£O LAND, OBSTACLE itp zamiast LandFileName?
-			if (gpElemPaneClicked != null) {
-				if (GpMainHM.containsKey(p)) {
-					// podmianka
-				} else {
-					String filename = e.getFileName();
-					String landFilename = null;
-					String obstacleFilename = null;
-					String creatureFilename = null;
-					if (e instanceof Land) {
-						landFilename = filename;
-					} else if (e instanceof Obstacle) {
-						obstacleFilename = filename;
-					} else if (e instanceof Creature) {
-						creatureFilename = filename;
+			boolean notRotate = true;
+
+			if (GpMainHM.containsKey(p)) {
+				Field f = GpMainHM.get(p);
+				Land l = f.getLand();
+				if (GpElemHM.get(gpElemPaneClicked) == l || (gpElemPaneClicked == null && l != null)) {
+					int r = f.getLandRotation();
+					if (r == 270) {
+						f.setLandRotation(0);
+					} else {
+						f.setLandRotation(r + 90);
 					}
-					Field f = new Field(boardRow, boardCol, row, col, landFilename, 0, obstacleFilename,
-							creatureFilename);
-					GpMainHM.put(p, f);
-					Image img = new Image("/img/" + e.getClass().getSimpleName() + "s/" + e.getFileName(), 59, 59, true,
-							false);
-					ImageView iv = new ImageView(img);
-					p.getChildren().add(iv);
+					notRotate = false;
+					changeFieldImg(p, f);
 				}
 			}
+			if (notRotate) {
+				if (gpElemPaneClicked != null) {
+					if (GpMainHM.containsKey(p)) {
+						Field f = GpMainHM.get(p);
+						if (e instanceof Land) {
+							f.setLand((Land) e);
+						} else if (e instanceof Obstacle) {
+							if (f.getCreature() != null) {
+								f.setCreature(null);
+							}
+							f.setObstacle((Obstacle) e);
+						} else if (e instanceof Creature) {
+							if (f.getObstacle() != null) {
+								f.setObstacle(null);
+							}
+							f.setCreature((Creature) e);
+						}
+
+						changeFieldImg(p, f);
+						
+					} else {
+						Land land = null;
+						Obstacle obstacle = null;
+						Creature creature = null;
+						if (e instanceof Land) {
+							land = (Land) e;
+						} else if (e instanceof Obstacle) {
+							obstacle = (Obstacle) e;
+						} else if (e instanceof Creature) {
+							creature = (Creature) e;
+						}
+						Field f = new Field(boardRow, boardCol, row, col, land, 0, obstacle, creature);
+						GpMainHM.put(p, f);
+						Image img = new Image("/img/" + e.getClass().getSimpleName() + "s/" + e.getFileName(), 59, 59,
+								true, false);
+						ImageView iv = new ImageView(img);
+						p.getChildren().add(iv);
+					}
+				}
+			}
+		}
+	}
+
+	private void changeFieldImg(Pane p, Field f) {
+		p.getChildren().clear();
+
+		Image img;
+		ImageView iv;
+
+		Land l = f.getLand();
+		if (l != null) {
+			img = new Image("/img/Lands/" + l.getFileName(), 59, 59, true, false);
+			iv = new ImageView(img);
+			iv.setRotate(f.getLandRotation());
+			p.getChildren().add(iv);
+		}
+
+		Obstacle o = f.getObstacle();
+		if (o != null) {
+			img = new Image("/img/Obstacles/" + o.getFileName(), 59, 59, true, false);
+			iv = new ImageView(img);
+			p.getChildren().add(iv);
+		}
+
+		Creature c = f.getCreature();
+		if (c != null) {
+			img = new Image("/img/Creatures/" + c.getFileName(), 59, 59, true, false);
+			iv = new ImageView(img);
+			p.getChildren().add(iv);
 		}
 	}
 
